@@ -31,23 +31,11 @@ public class MapMaker {
                 nodes.put(elem.getInt("id"), new Location(elem.getJsonNumber("lat").doubleValue(), elem.getJsonNumber("lon").doubleValue()));
             }
         }
-        
-//        try {
-//        	FileWriter fileWriter = new FileWriter("/Users/srujanaadapa/Documents/SEM2/PSA/Project/BlinkStep/b.txt");
-//        	PrintWriter outfile = new PrintWriter(fileWriter);
-//        	System.out.print("Written");
-//        	System.out.println("Absolute path: " + new File("/Users/srujanaadapa/Documents/SEM2/PSA/Project/BlinkStep/b.txt").getAbsolutePath());
-//        	outfile.println("Simple Test");
-//            outfile.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
         PrintWriter outfile = null;
         try {
-            FileWriter fileWriter = new FileWriter("/Users/srujanaadapa/Documents/SEM2/PSA/Project/BlinkStep/./b.txt");
+            FileWriter fileWriter = new FileWriter("data/maps/boston_cordinates.txt");
             outfile = new PrintWriter(fileWriter);
-//            outfile.print("Started");
             System.out.print("Written");
             System.out.println(System.getProperty("user.dir"));
             System.out.println("Writing to file at: " + new java.io.File("./b.txt").getAbsolutePath());
@@ -80,35 +68,11 @@ public class MapMaker {
             return false;
         } finally {
             if (outfile != null) {
-                outfile.close(); // Always close the stream
+                outfile.close(); 
             }
         }
-
-
-//        outfile.close();
         return true;
     }
-
-//    public static void main(String[] args) {
-//        if (args.length != 4) {
-//            System.out.println("Incorrect number of arguments.");
-//            System.out.println(args.length);
-//            return;
-//        }
-//
-//        float[] bound_arr = new float[4];
-//        try {
-//            for (int i = 0; i < args.length; i++) {
-//                bound_arr[i] = Float.parseFloat(args[i]);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return;
-//        }
-//
-//        MapMaker map = new MapMaker(bound_arr);
-//        map.parseData("ucsd.map");
-//    }
 }
 
 class Location {
