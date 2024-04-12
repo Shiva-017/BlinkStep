@@ -58,7 +58,6 @@ public class FetchController {
 
     private void loadDataSets() {
     	try {
-    		System.out.println("inside this");
 			BufferedReader reader = new BufferedReader(new FileReader(persistPath));
             String line = reader.readLine();
             while(line != null) {

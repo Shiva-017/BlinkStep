@@ -1,7 +1,4 @@
 /** Class to manage Markers on the Map
- * 
- * @author UCSD MOOC development team
- *
  */
 
 package application;
@@ -53,17 +50,11 @@ public class MarkerManager {
         markerPositions = null;
     }
     public MarkerManager(GoogleMap map, SelectManager selectManager) {
-    	// TODO -- parameters?
         dataSet = null;
 
     }
 
-    /**
-     * Used to set reference to visualization button. Manager will be responsible
-     * for disabling button
-     *
-     * @param vButton
-     */
+    
     public void setVisButton(Button vButton) {
     	this.vButton = vButton;
     }
@@ -84,9 +75,7 @@ public class MarkerManager {
 
     }
 
-    /** Used to initialize new RouteVisualization object
-     *
-     */
+    
     public void initVisualization() {
     	rv = new RouteVisualization(this);
     }
@@ -96,7 +85,6 @@ public class MarkerManager {
     	rv = null;
     }
 
-    // TODO -- protect against this being called without visualization built
     public void startVisualization() {
     	if(rv != null) {
 	    	rv.startVisualization();
@@ -106,19 +94,15 @@ public class MarkerManager {
     public void setStart(geography.GeographicPoint point) {
     	if(startMarker!= null) {
             changeIcon(startMarker, markerURL);
-//            startMarker.setZIndex(DEFAULT_Z);
     	}
         startMarker = markerMap.get(point);
-//        startMarker.setZIndex(STRTDEST_Z);
         changeIcon(startMarker, startURL);
     }
     public void setDestination(geography.GeographicPoint point) {
     	if(destinationMarker != null) {
     		destinationMarker.setIcon(markerURL);
-//            destinationMarker.setZIndex(DEFAULT_Z);
     	}
         destinationMarker = markerMap.get(point);
-//        destinationMarker.setZIndex(STRTDEST_Z);
         changeIcon(destinationMarker, destinationURL);
     }
 
@@ -128,14 +112,11 @@ public class MarkerManager {
         marker.setVisible(true);
     }
 
-    /**
-     * TODO -- Might need to create all new markers and add them??
-     */
+    
     public void restoreMarkers() {
     	Iterator<geography.GeographicPoint> it = markerMap.keySet().iterator();
         while(it.hasNext()) {
             Marker marker = markerMap.get(it.next());
-            // destination marker needs to be added because it is added in javascript
             if(marker != startMarker) {
                 marker.setVisible(false);
                 marker.setVisible(true);
@@ -190,7 +171,6 @@ public class MarkerManager {
             if(marker != startMarker && marker != destinationMarker) {
                 marker.setVisible(false);
             }
-//        	map.addMarker(marker);
         }
     }
 
@@ -202,10 +182,8 @@ public class MarkerManager {
     	if(markerMap.containsKey(point)) {
         	Marker marker = markerMap.get(point);
             marker.setVisible(true);
-            // System.out.println("Marker : " + marker + "set to visible");
     	}
     	else {
-    		// System.out.println("no key found for MarkerManager::displayMarker");
     	}
     }
     public void displayDataSet() {
@@ -223,40 +201,23 @@ public class MarkerManager {
         	map.addMarker(marker);
         	putMarker(point, marker);
         	markerPositions.add(point);
-//            marker.setZIndex(DEFAULT_Z);
         }
         map.fitBounds(bounds);
-        // System.out.println("End of display Intersections");
 
     }
 
 
     private void registerEvents(Marker marker, geography.GeographicPoint point) {
-        /*map.addUIEventHandler(marker, UIEventType.mouseover, (JSObject o) -> {
-           marker.setVisible(true);
-           //marker.setAnimation(Animation.BOUNCE);
-        });
-
-        map.addUIEventHandler(marker, UIEventType.mouseout, (JSObject o) -> {
-        	marker.setAnimation(null);
-        });*/
 
         map.addUIEventHandler(marker, UIEventType.click, (JSObject o) -> {
-            //System.out.println("Clicked Marker : " + point.toString());
             if(selectMode) {
                 	if(selectedMarker != null && selectedMarker != startMarker
                 	   && selectedMarker != destinationMarker) {
                 		selectedMarker.setIcon(markerURL);
-//                		selectedMarker.setZIndex(DEFAULT_Z);
                 	}
             	selectManager.setPoint(point, marker);
                 selectedMarker = marker;
                 selectedMarker.setIcon(SELECTED_URL);
-//                selectedMarker.setZIndex(SELECT_Z);
-
-                // re add markers to map
-                // slightly glitchy
-//                refreshMarkers();
             }
         });
     }

@@ -75,7 +75,7 @@ public class MapMaker {
         }
 
         MapMaker map = new MapMaker(bound_arr);
-        map.parseData("ucsd.map");
+        map.parseData("boston_coordinates.map");
     }
 }
 

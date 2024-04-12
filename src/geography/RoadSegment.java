@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** 
- * A segment of the road that includes the intersection end points
- * as well as all the minor points that make up the intermediate geometry.
- * @author Christine
- *
- */
 
 public class RoadSegment {
 
@@ -21,7 +15,6 @@ public class RoadSegment {
 	private String roadName;
 	private String roadType;
 	
-	// Length in km
 	private double length;
 	
 	public RoadSegment(GeographicPoint pt1, GeographicPoint pt2, 
@@ -66,9 +59,6 @@ public class RoadSegment {
 		return allPoints;
 	}
 	
-	/** Two road segments are equal if they have the same start and end points
-	 *  and they have the same road name.
-	 */
 	public boolean equals(Object o)
 	{
 		if (!(o instanceof RoadSegment)) {
@@ -87,13 +77,11 @@ public class RoadSegment {
 		return this.roadName.equals(other.roadName) && ptsEqual && this.length == other.length;
 	}
 	
-	// get hashCode
 	public int hashCode()
 	{
 		return point1.hashCode() + point2.hashCode();
 	}
 	
-	// return road segment as String
 	public String toString()
 	{
 		String toReturn = this.roadName + ", " +this.roadType;
@@ -106,11 +94,9 @@ public class RoadSegment {
 		return toReturn;
 	}
 
-	// get the length of the road segment
 	public double getLength() { return this.length; }
 	
 	
-	// given one end, return the other.
 	public geography.GeographicPoint getOtherPoint(geography.GeographicPoint point) {
 		if(point.equals(point1)) {
 			return point2;

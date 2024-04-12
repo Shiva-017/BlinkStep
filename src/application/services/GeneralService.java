@@ -42,10 +42,6 @@ public class GeneralService {
         this.markerManager.setMap(map);
     	filenames = new ArrayList<String>();
 
-    	// uncomment to click map and print coordinates
-    	/*mapComponent.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
-    		System.out.println(obj.getMember("latLng"));
-    	});*/
     }
 
 
@@ -149,11 +145,9 @@ public class GeneralService {
             	   fetchingAlert.close();
                }
                MapApp.showInfoAlert("Fetch completed : ", "Data set : \"" + fName + "\" written to file!");
-               // System.out.println("Fetch Task Succeeded");
 
            }
            else {
-               // System.out.println("Something went wrong, data not written to file : Task succeeded but fName returned differently");
 
            }
 
