@@ -238,7 +238,6 @@ public abstract class Graph {
 	
 	/** Main method provided with some basic tests.  */
 	public static void main (String[] args) {
-		GraphLoader.createIntersectionsFile("data/maps/ucsd.map", "data/intersections/ucsd.intersections");
 		
 
 		// For testing of Part 1 functionality
@@ -250,7 +249,6 @@ public abstract class Graph {
 		System.out.println("****");
 		System.out.println("Roads / intersections:");
 		GraphAdjList graphFromFile = new GraphAdjList();
-		GraphLoader.loadRoadMap("data/testdata/simpletest.map", graphFromFile);
 		System.out.println(graphFromFile);
 		
 		System.out.println("Observe all degrees are <= 12.");
@@ -262,7 +260,6 @@ public abstract class Graph {
 		
 		System.out.println("Flight data:");
 		GraphAdjList airportGraph = new GraphAdjList();
-		GraphLoader.loadRoutes("data/airports/routesUA.dat", airportGraph);
 		System.out.println(airportGraph);
 		System.out.println("Observe most degrees are small (1-30), eight are over 100.");
 		System.out.println("****");

@@ -9,9 +9,6 @@ import javafx.scene.paint.Paint;
 
 /**
  * Label which has an object property associated with it
- *
- * @author UCSD MOOC development team
- *
  * @param <T> Type of object associated with label
  */
 

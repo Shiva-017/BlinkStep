@@ -1,7 +1,4 @@
-/** Class to aid with route visualization for search
- *  
- * @author UCSD MOOC development team
- *
+/** Class for route visualization for search
  */
 
 package application;
@@ -29,8 +26,6 @@ public class RouteVisualization {
     IJavascriptRuntime runtime;
 
 
-
-
 	public RouteVisualization(MarkerManager manager) {
         points = new ArrayList<geography.GeographicPoint>();
         markerList = new ArrayList<Marker>();
@@ -40,8 +35,6 @@ public class RouteVisualization {
 
     public void acceptPoint(geography.GeographicPoint point) {
     	points.add(point);
-
-        // System.out.println("accepted point : " + point);
     }
 
 
@@ -53,9 +46,7 @@ public class RouteVisualization {
     	JavascriptArray jsArray = new JavascriptArray();
     	manager.hideIntermediateMarkers();
         manager.hideDestinationMarker();
-//    	manager.disableRouteButtons(true);
 
-    	// create JavascriptArray of points
     	for(geography.GeographicPoint point : points) {
     		LatLong ll = new LatLong(point.getX(), point.getY());
     		MarkerOptions options = MarkerManager.createDefaultOptions(ll);
@@ -65,20 +56,14 @@ public class RouteVisualization {
             bounds.extend(ll);
     	}
 
-    	// fit map bounds to visualization
     	manager.getMap().fitBounds(bounds);
 
-        // get javascript runtime and execute animation
     	runtime = JavascriptRuntime.getInstance();
     	String command = runtime.getFunction("visualizeSearch", manager.getMap(), jsArray);
-    	// System.out.println(command);
 
     	runtime.execute(command);
 
-//    	MapApp.showInfoAlert("Nodes visited :"  , latLongs.size() +" nodes were visited in the search");
     	manager.disableVisButton(true);
-//        manager.disableRouteButtons(false);
-
 
     }
 
