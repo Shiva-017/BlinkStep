@@ -1,6 +1,4 @@
 /* *
- * @author Jitendra Bhamare
- * 
  * A class to represent a connecting road between two MapNodes 
  * Contains following information
  * - location of start MapNode
@@ -17,21 +15,12 @@ import geography.GeographicPoint;
 
 
 public class MapEdge {
-	
-	// -----------------------------------------------------
-	//			Member Variables
-	// -----------------------------------------------------
 	private GeographicPoint start;
 	private GeographicPoint end;
 	private String name;
 	private String type;
 	private double length;
-	
-	// -----------------------------------------------------
-	//			Constructors
-	// -----------------------------------------------------
-	
-	/* Create an empty MapEdge */
+
 	public MapEdge() {	
 	}
 	
@@ -50,10 +39,6 @@ public class MapEdge {
 		this.type = roadType;
 		this.length = length;		
 	}
-	
-	// -----------------------------------------------------
-	//			Member Methods
-	// -----------------------------------------------------
 	
 	/** Getter for start point 
 	 * @return start

@@ -58,8 +58,9 @@ public class DataSet {
         graph = new roadgraph.MapGraph();
         roads = new HashMap<geography.GeographicPoint, HashSet<geography.RoadSegment>>();
         intersections = new HashSet<GeographicPoint>();
-        //TODO: change to use intersections for points in graph.
-    	GraphLoader.loadRoadMap(filePath, graph, roads, intersections);
+        GraphLoader graphLoader = new GraphLoader();
+		//TODO: change to use intersections for points in graph.
+    	graphLoader.loadRoadMap(filePath, graph, roads, intersections);
     }
 
 	public String getFilePath() {

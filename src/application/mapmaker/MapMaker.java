@@ -34,7 +34,7 @@ public class MapMaker {
 
         PrintWriter outfile = null;
         try {
-            FileWriter fileWriter = new FileWriter("data/maps/boston_cordinates.txt");
+            FileWriter fileWriter = new FileWriter("data/maps/boston_coordinates.map");
             outfile = new PrintWriter(fileWriter);
             
             for (JsonObject elem : elements.getValuesAs(JsonObject.class)) {

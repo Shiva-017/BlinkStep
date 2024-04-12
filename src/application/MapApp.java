@@ -141,9 +141,7 @@ implements MapComponentInitializedListener{
 	        map1.parseData("boston_coordinates.map");
 	        
 	     // initialize Services and controllers after map is loaded
-	        System.out.println("hello");
 			mapComponent.addMapReadyListener(() -> {
-				System.out.println("inside ?");
 				GeneralService gs = new GeneralService(mapComponent, manager, markerManager);
 				RouteService rs = new RouteService(mapComponent, markerManager);
 				//System.out.println("in map ready : " + this.getClass());

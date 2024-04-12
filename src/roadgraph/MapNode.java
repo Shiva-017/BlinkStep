@@ -1,10 +1,7 @@
-/* *
- * @author Jitendra Bhamare
- * 
+/*  
  * A class to represent an intersection of a graph (or a vertex) 
  * Contains information of location of an intersection and 
- * list of all roads connected 
- * 
+ * list of all roads connected  
  * */
 
 package roadgraph;
@@ -13,10 +10,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class MapNode implements Comparable<MapNode>{
-
-	// -----------------------------------------------------
-	//			Member Variables
-	// -----------------------------------------------------
 	private GeographicPoint location;
 	private List<MapEdge> roadList;
 	private List<MapNode> neighbors;
@@ -24,12 +17,7 @@ public class MapNode implements Comparable<MapNode>{
 	private Double heuristicCost;
 	private boolean astarFlag;
 	
-	// -----------------------------------------------------
-	//			Constructors
-	// -----------------------------------------------------
 	
-	/** Create an empty MapNode 
-	 * */
 	public MapNode() {
 		this.location = null;
 		this.roadList = new ArrayList<MapEdge>();
@@ -51,9 +39,6 @@ public class MapNode implements Comparable<MapNode>{
 		this.astarFlag = false;		
 	}
 	
-	// -----------------------------------------------------
-	// 			Member Methods
-	// -----------------------------------------------------
 	
 	/** Getter for a location of MapNode 
 	 * @return location
