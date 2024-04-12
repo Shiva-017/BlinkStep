@@ -116,7 +116,7 @@ public class GoogleMapView extends AnchorPane {
             if (debug) {
                 htmlFile = "/html/maps-debug.html";
             } else {
-                htmlFile = "/html/index.html";
+                htmlFile = "/html/index1.html";
             }
         } else {
             htmlFile = mapResourcePath;

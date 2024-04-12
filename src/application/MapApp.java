@@ -67,7 +67,7 @@ implements MapComponentInitializedListener{
 		this.primaryStage = primaryStage;
 		try {
 			//boston boundaries
-	        float[] bound_arr = new float[] {42.3146f, -71.1061f, 42.3736f, -71.0330f};
+	        float[] bound_arr = new float[] {42.35f, -71.08f, 42.36f, -71.07f};
 	        
 	        // MAIN CONTAINER
 	        bp = new BorderPane();
@@ -171,7 +171,8 @@ implements MapComponentInitializedListener{
 	@Override
 	public void mapInitialized() {
 
-		LatLong center = new LatLong(62.8810, -117.2380);
+		LatLong center = new LatLong(42.3601,-71.0589);
+		//LatLong center = new LatLong(42.3411, -71.0886);
 
 
 		// set map options
