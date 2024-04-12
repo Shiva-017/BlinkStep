@@ -154,8 +154,12 @@ implements MapComponentInitializedListener{
 	        // pane components
 			bp.setRight(tp);
 			bp.setBottom(fetchControls);
+			//mapComponent.autosize();
+			mapComponent.setMaxHeight(480);
+			
+			
 			bp.setCenter(mapComponent);
-			Button btOK = new Button("Hello To Blink Step");
+			//Button btOK = new Button("Hello To Blink Step");
 			Scene scene = new Scene(bp);
 			scene.getStylesheets().add("html/routing.css");
 			primaryStage.setTitle("Blink Step");
@@ -204,11 +208,9 @@ implements MapComponentInitializedListener{
 	}
 	
 	private VBox getFetchBox(Button displayButton, ComboBox<DataSet> cb) {
-		// add button to tab, rethink design and add V/HBox for content
+		// add button to tab,  design and add V/HBox for content
 		VBox v = new VBox();
 		HBox h = new HBox();
-
-
 
 		HBox intersectionControls = new HBox();
 		//        cb.setMinWidth(displayButton.getWidth());
