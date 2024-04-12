@@ -114,9 +114,7 @@ implements MapComponentInitializedListener{
 			
 			List<RadioButton> searchOptions = setupToggle(group);
 
-			
-			// Select and marker managers for route choosing and marker display/visuals
-			// should only be one instance (singleton)
+		
 			SelectManager manager = new SelectManager();
 			MarkerManager markerManager = new MarkerManager();
 			markerManager.setSelectManager(manager);
