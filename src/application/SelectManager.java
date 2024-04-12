@@ -1,7 +1,4 @@
 /** Class to manage items selected in the GUI
- * 
- * @author UCSD MOOC development team
- *
  */
 
 package application;
@@ -41,7 +38,6 @@ public class SelectManager {
 
     public void setAndDisplayData(DataSet data) {
     	setDataSet(data);
-        //TODO - maybe if markerManager!= null?
         if(markerManager != null) {
             markerManager.displayDataSet();
         }

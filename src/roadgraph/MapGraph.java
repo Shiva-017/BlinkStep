@@ -1,6 +1,4 @@
-/**
- * @author UCSD MOOC development team and YOU
- * 
+/*
  * A class which represents a graph of geographic locations
  * Nodes in the graph are intersections between 
  *
