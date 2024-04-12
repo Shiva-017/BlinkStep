@@ -192,8 +192,6 @@ implements MapComponentInitializedListener{
 
 		// create map;
 		map = mapComponent.createMap(options);
-		GoogleMap m1 = mapComponent.createMap();
-		System.out.println(m1.getBounds());
 		setupJSAlerts(mapComponent.getWebView());
 	}
 	
