@@ -5,8 +5,8 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
-import java.util.Arrays;
-import java.util.LinkedList;
+import LinkedListADT.LinkedListADT;
+
 import java.util.List;
 
 import application.controllers.FetchController;
@@ -112,6 +112,7 @@ implements MapComponentInitializedListener{
 			// Radio buttons for selecting search algorithm
 			final ToggleGroup group = new ToggleGroup();
 			
+			@SuppressWarnings("unchecked")
 			List<RadioButton> searchOptions = setupToggle(group);
 
 		
@@ -310,12 +311,14 @@ implements MapComponentInitializedListener{
 		});
 	}
 	
-	private LinkedList<RadioButton> setupToggle(ToggleGroup group) {
+	@SuppressWarnings("unchecked")
+	private <T> List<T> setupToggle(ToggleGroup group) {
 
 		// Use Dijkstra as default
 		RadioButton rbD = new RadioButton("Dijkstra");
 		rbD.setUserData("Dijkstra");
 		rbD.setSelected(true);
+//		ArraysADT arrayOps = new ArraysADT();
 
 		RadioButton rbA = new RadioButton("A*");
 		rbA.setUserData("A*");
@@ -326,7 +329,12 @@ implements MapComponentInitializedListener{
 		rbB.setToggleGroup(group);
 		rbD.setToggleGroup(group);
 		rbA.setToggleGroup(group);
-		return new LinkedList<RadioButton>(Arrays.asList(rbB, rbD, rbA));
+		@SuppressWarnings("rawtypes")
+		LinkedListADT ll = new LinkedListADT();
+		ll.add((T)rbB);
+		ll.add((T)rbD);
+		ll.add((T)rbA);
+		return ll.toStandardList();
 	}
 	
 	/* METHODS FOR ALERTS */
