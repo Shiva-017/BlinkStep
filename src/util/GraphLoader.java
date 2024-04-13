@@ -553,7 +553,7 @@ public class GraphLoader implements GraphLoaderInterface
 	{
 		
 		GraphLoader graphLoader = new GraphLoader();
-		graphLoader.createIntersectionsFile("data/maps/boston.map", "data/intersections/boston.intersections");
+		graphLoader.createIntersectionsFile("data/maps/boston_coordinates.map", "data/intersections/boston.intersections");
 
 	}
 	
