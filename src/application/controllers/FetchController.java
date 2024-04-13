@@ -30,7 +30,7 @@ public class FetchController {
     private GeneralService generalService;
     private RouteService routeService;
     private Node container;
-    private Button fetchButton;
+//    private Button fetchButton;
     private Button displayButton;
     private ComboBox<DataSet> dataChoices;
     // maybe choice map
@@ -42,15 +42,15 @@ public class FetchController {
 
 
     public FetchController(GeneralService generalService, RouteService routeService, TextField writeFile,
-    					   Button fetchButton, ComboBox<DataSet> cb, Button displayButton) {
+    					   ComboBox<DataSet> cb, Button displayButton) {
         this.generalService = generalService;
         this.routeService = routeService;
-        this.fetchButton = fetchButton;
+      //  this.fetchButton = fetchButton;
         this.displayButton = displayButton;
         this.writeFile = writeFile;
         dataChoices = cb;
         setupComboCells();
-        setupFetchButton();
+    //    setupFetchButton();
         setupDisplayButton();
         loadDataSets();
 

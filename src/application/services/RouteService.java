@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 
 
 import application.DataSet;
+import application.GoogleMapView;
 import application.MapApp;
 import application.MarkerManager;
 import application.RouteVisualization;
@@ -20,7 +21,6 @@ import java.util.Iterator;
 
 import geography.GeographicPoint;
 import geography.RoadSegment;
-import gmapsfx.GoogleMapView;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.LatLongBounds;

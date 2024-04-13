@@ -14,7 +14,7 @@ import application.controllers.RouteController;
 import application.mapmaker.MapMaker;
 import application.services.GeneralService;
 import application.services.RouteService;
-import gmapsfx.GoogleMapView;
+import application.GoogleMapView;
 import gmapsfx.MapComponentInitializedListener;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
@@ -146,7 +146,7 @@ implements MapComponentInitializedListener{
 				// initialize controllers
 				new RouteController(rs, routeButton, hideRouteButton, resetButton, startButton, destinationButton, group, searchOptions, visualizationButton,
 						startLabel, endLabel, pointLabel, manager, markerManager);
-				new FetchController(gs, rs, tf, fetchButton, cb, displayButton);
+				new FetchController(gs, rs, tf, cb, displayButton);
 			});
 	        
 	        // pane components

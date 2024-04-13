@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import application.DataSet;
+import application.GoogleMapView;
 import application.MapApp;
 import application.MarkerManager;
 import application.SelectManager;
-import gmapsfx.GoogleMapView;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.LatLongBounds;
