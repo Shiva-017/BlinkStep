@@ -1,7 +1,6 @@
 package application.services;
 
-import java.util.ArrayList;
-import java.util.List;
+import ArrayListADT.ArrayListADT;
 import java.util.regex.Pattern;
 
 import application.DataSet;
@@ -31,7 +30,7 @@ public class GeneralService {
     private static final String DATA_FILE_PATTERN = "[\\w_]+.map";
     private static final String DATA_FILE_DIR_STR = "data/maps/";
 
-    private List<String> filenames;
+    private ArrayListADT<String> filenames;
     DataSet dataSet;
 
     public GeneralService(GoogleMapView mapComponent, SelectManager selectManager, MarkerManager markerManager) {
@@ -40,7 +39,7 @@ public class GeneralService {
     	this.selectManager = selectManager;
         this.markerManager = markerManager;
         this.markerManager.setMap(map);
-    	filenames = new ArrayList<String>();
+    	filenames = new ArrayListADT<String>();
 
     }
 
@@ -172,7 +171,7 @@ public class GeneralService {
 
 
 
-    public List<String> getDataFiles() {
+    public ArrayListADT<String> getDataFiles() {
     	return filenames;
     }
 

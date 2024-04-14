@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import gmapsfx.javascript.event.UIEventType;
-import gmapsfx.javascript.object.Animation;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.Marker;

@@ -9,21 +9,16 @@ import java.io.FileReader;
 import application.DataSet;
 import application.services.GeneralService;
 import application.services.RouteService;
-import gmapsfx.javascript.object.GoogleMap;
-import gmapsfx.javascript.object.LatLong;
-import gmapsfx.javascript.object.LatLongBounds;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
-import mapmaker.MapMaker;
 
 public class FetchController {
     private static final int ROW_COUNT = 5;

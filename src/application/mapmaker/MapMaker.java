@@ -1,6 +1,5 @@
 package application.mapmaker;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.HashMap;

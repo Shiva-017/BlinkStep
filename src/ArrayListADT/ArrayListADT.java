@@ -14,6 +14,13 @@ public class ArrayListADT<T> implements ArrayListADTInterface<T> {
         ensureCapacity();
         elements[size++] = item;
     }
+    
+    @Override
+    public void addAll(T[] items) {
+    	for(int i=0; i<items.length; i++) {
+    		this.add(items[i]);
+    	}
+    }
 
     @Override
     public T get(int index) {
@@ -37,6 +44,23 @@ public class ArrayListADT<T> implements ArrayListADTInterface<T> {
 //        }
 //        return false;
 //    }
+    
+    @Override
+    public T remove(int n) {
+    	for (int i = 0; i<size; i++) {
+    		if(i==n) {
+    			int numMoved = size - i - 1;
+              if (numMoved > 0) {
+                  System.arraycopy(elements, i + 1, elements, i, numMoved);
+              }
+              @SuppressWarnings("unchecked")
+			T element = (T) elements[i];
+              elements[--size] = null; // clear to let GC do its work
+              return element;
+    		}
+    	}
+    	return null;
+    }
     
     public T[] toArray() {
         T[] newArray = (T[]) new Object[size]; // This cast is unchecked, warning can be suppressed
