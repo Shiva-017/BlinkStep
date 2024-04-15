@@ -1,8 +1,9 @@
 package ArrayListADT;
+import java.util.ArrayList;
 
 public interface ArrayListADTInterface<T> {
 	 void add(T item);
-	 void addAll(T[] items);
+	 void addAll(ArrayList<T> items);
 	 T get(int index);
 //	 boolean remove(T item);
 	 T remove(int n);

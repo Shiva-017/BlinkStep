@@ -1,16 +1,11 @@
 package application.services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Consumer;
 
-
-import application.DataSet;
+import HashSetADT.HashSetADT;
 import application.MapApp;
 import application.MarkerManager;
 import application.RouteVisualization;
@@ -18,15 +13,12 @@ import application.controllers.RouteController;
 
 import java.util.Iterator;
 
-import geography.GeographicPoint;
-import geography.RoadSegment;
 import gmapsfx.GoogleMapView;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.LatLongBounds;
 import gmapsfx.javascript.object.MVCArray;
 import gmapsfx.shapes.Polyline;
-import javafx.scene.control.Button;
 
 public class RouteService {
 	private GoogleMap map;
@@ -162,7 +154,7 @@ public class RouteService {
         	next = path.get(i+1);
 
         	if(markerManager.getDataSet().getRoads().containsKey(curr)) {
-        		HashSet<geography.RoadSegment> segments = markerManager.getDataSet().getRoads().get(curr);
+        		HashSetADT<geography.RoadSegment> segments = markerManager.getDataSet().getRoads().get(curr);
         		Iterator<geography.RoadSegment> it = segments.iterator();
 
         		// get segments which are

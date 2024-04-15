@@ -1,5 +1,8 @@
 package ArrayListADT;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ArrayListADT<T> implements ArrayListADTInterface<T> {
 	private Object[] elements;
     private int size = 0;
@@ -7,6 +10,13 @@ public class ArrayListADT<T> implements ArrayListADTInterface<T> {
 
     public ArrayListADT() {
         elements = new Object[DEFAULT_CAPACITY];
+    }
+    
+    public ArrayListADT(List<T> items) {
+        elements = new Object[DEFAULT_CAPACITY];
+        for(int i=0; i<items.size(); i++) {
+        	this.add(items.get(i));
+        }
     }
 
     @Override
@@ -16,9 +26,9 @@ public class ArrayListADT<T> implements ArrayListADTInterface<T> {
     }
     
     @Override
-    public void addAll(T[] items) {
-    	for(int i=0; i<items.length; i++) {
-    		this.add(items[i]);
+    public void addAll(ArrayList<T> items) {
+    	for(int i=0; i<items.size(); i++) {
+    		this.add(items.get(i));
     	}
     }
 
@@ -55,7 +65,7 @@ public class ArrayListADT<T> implements ArrayListADTInterface<T> {
               }
               @SuppressWarnings("unchecked")
 			T element = (T) elements[i];
-              elements[--size] = null; // clear to let GC do its work
+              elements[--size] = null;
               return element;
     		}
     	}
@@ -63,8 +73,18 @@ public class ArrayListADT<T> implements ArrayListADTInterface<T> {
     }
     
     public T[] toArray() {
-        T[] newArray = (T[]) new Object[size]; // This cast is unchecked, warning can be suppressed
+        @SuppressWarnings("unchecked")
+		T[] newArray = (T[]) new Object[size];
         System.arraycopy(elements, 0, newArray, 0, size);
+        return newArray;
+    }
+    
+    @SuppressWarnings("unchecked")
+	public ArrayList<T> toArrayList() {
+        ArrayList<T> newArray = new ArrayList<>(size); 
+        for (int i = 0; i < size; i++) {
+            newArray.add((T) elements[i]); 
+        }
         return newArray;
     }
     
