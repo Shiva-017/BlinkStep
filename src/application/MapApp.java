@@ -80,7 +80,7 @@ implements MapComponentInitializedListener{
 			Tab routeTab = new Tab("Routing");
 			
 			// create components for fetch tab
-			Button fetchButton = new Button("Fetch Data");
+		//	Button fetchButton = new Button("Fetch Data");
 			Button displayButton = new Button("Show Intersections");
 			TextField tf = new TextField();
 			ComboBox<DataSet> cb = new ComboBox<DataSet>();
@@ -90,7 +90,7 @@ implements MapComponentInitializedListener{
 				cb.requestFocus();
 			});
 
-			HBox fetchControls = getBottomBox(tf, fetchButton);
+		//	HBox fetchControls = getBottomBox(tf, fetchButton);
 
 			VBox fetchBox = getFetchBox(displayButton, cb);
 			
@@ -151,7 +151,7 @@ implements MapComponentInitializedListener{
 	        
 	        // pane components
 			bp.setRight(tp);
-			bp.setBottom(fetchControls);
+		//	bp.setBottom(fetchControls);
 			//mapComponent.autosize();
 			mapComponent.setMaxHeight(480);
 			

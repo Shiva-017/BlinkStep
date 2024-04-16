@@ -491,7 +491,6 @@ public class GraphLoader implements GraphLoaderInterface
             System.err.println("Problem loading dictionary file: " + filename);
             e.printStackTrace();
         }
-		
 		return pointMap;
 	}
 
@@ -553,7 +552,7 @@ public class GraphLoader implements GraphLoaderInterface
 	{
 		
 		GraphLoader graphLoader = new GraphLoader();
-		graphLoader.createIntersectionsFile("data/maps/boston_coordinates.map", "data/intersections/boston.intersections");
+	//	graphLoader.createIntersectionsFile("data/maps/boston_coordinates.map", "data/intersections/boston.intersections");
 
 	}
 	
