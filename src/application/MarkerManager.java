@@ -19,10 +19,6 @@ import netscape.javascript.JSObject;
 
 public class MarkerManager {
 
-    private static final double DEFAULT_Z = 2;
-    private static final double SELECT_Z = 1;
-    private static final double STRTDEST_Z = 3;
-
     private HashMap<geography.GeographicPoint, Marker> markerMap;
     private ArrayListADT<geography.GeographicPoint> markerPositions;
     private GoogleMap map;
@@ -57,6 +53,7 @@ public class MarkerManager {
     public void setVisButton(Button vButton) {
     	this.vButton = vButton;
     }
+    
 
     public void setSelect(boolean value) {
     	selectMode = value;

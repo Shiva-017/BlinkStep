@@ -11,10 +11,8 @@ import application.SelectManager;
 import application.CLabel;
 import application.MapApp;
 import application.services.RouteService;
-import gmapsfx.javascript.object.GoogleMap;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -60,7 +58,6 @@ public class RouteController {
 						   ToggleGroup group, List<RadioButton> searchOptions, Button visualizationButton,
 						   CLabel<geography.GeographicPoint> startLabel, CLabel<geography.GeographicPoint> endLabel,
 						   CLabel<geography.GeographicPoint> pointLabel, SelectManager manager, MarkerManager markerManager, Button exportButton) {
-        // save parameters
         this.routeService = routeService;
 		this.displayButton = displayButton;
         this.hideButton = hideButton;
@@ -71,7 +68,6 @@ public class RouteController {
         this.visualizationButton = visualizationButton;
         this.exportButton = exportButton;
 
-        // maybe don't need references to labels;
 		this.startLabel = startLabel;
 		this.endLabel = endLabel;
         this.pointLabel = pointLabel;
@@ -83,7 +79,6 @@ public class RouteController {
         setupVisualizationButton();
         setupLabels();
         setupToggle();
-        //routeService.displayRoute("data/sampleroute.map");
 	}
 
 
@@ -91,7 +86,6 @@ public class RouteController {
 		displayButton.setOnAction(e -> {
             if(startLabel.getItem() != null && endLabel.getItem() != null) {
         			routeService.displayRoute(startLabel.getItem(), endLabel.getItem(), selectedToggle);
-        			 // enable export button if map displaying is succesful
         		    exportButton.setDisable(false);
         		    exportButton.setOnAction(ex -> {
         		    	exportMap();
@@ -114,12 +108,8 @@ public class RouteController {
 	
 	
 
-	private void exportMap() {
-	    // Capture the current state of the map as an image
-	    
+	private void exportMap() {	    
 		BorderPane root = (BorderPane)MapApp.getPrimaryStage().getScene().getRoot();
-
-	 // Get the center component (assuming it's where your map is located)
 	    Node centerComponent = root.getCenter();
 	    SnapshotParameters parameters = new SnapshotParameters();
 	    parameters.setFill(Color.TRANSPARENT); 
@@ -154,7 +144,6 @@ public class RouteController {
 
     private void setupRouteButtons() {
     	startButton.setOnAction(e -> {
-            //System.out.println();
             selectManager.setStart();
     	});
 
