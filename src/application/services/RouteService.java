@@ -14,7 +14,7 @@ import application.RouteVisualization;
 import application.controllers.RouteController;
 
 import java.util.Iterator;
-import gmapsfx.GoogleMapView;
+import application.GoogleMapView;
 import geography.GeographicPoint;
 import geography.RoadSegment;
 import gmapsfx.javascript.object.GoogleMap;
