@@ -14,7 +14,6 @@ import application.controllers.RouteController;
 import application.mapmaker.MapMaker;
 import application.services.GeneralService;
 import application.services.RouteService;
-import application.GoogleMapView;
 import gmapsfx.MapComponentInitializedListener;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
@@ -84,11 +83,7 @@ implements MapComponentInitializedListener{
 	        mapComponent = new GoogleMapView();
 			mapComponent.addMapInitializedListener(this);
 			
-			// remove may be?
 			Tab routeTab = new Tab("Routing");
-			
-			// create components for fetch tab
-		//	Button fetchButton = new Button("Fetch Data");
 			Button displayButton = new Button("Show Intersections");
 			TextField tf = new TextField();
 			ComboBox<DataSet> cb = new ComboBox<DataSet>();
@@ -98,11 +93,8 @@ implements MapComponentInitializedListener{
 				cb.requestFocus();
 			});
 
-		//	HBox fetchControls = getBottomBox(tf, fetchButton);
-
 			VBox fetchBox = getFetchBox(displayButton, cb);
 			
-			// create components for fetch tab
 			Button routeButton = new Button("Show Route");
 			Button hideRouteButton = new Button("Hide Route");
 			Button resetButton = new Button("Reset");
@@ -118,7 +110,6 @@ implements MapComponentInitializedListener{
 			Button startButton = new Button("Start");
 			Button destinationButton = new Button("Dest");
 
-			// Radio buttons for selecting search algorithm
 			final ToggleGroup group = new ToggleGroup();
 			
 			@SuppressWarnings("unchecked")
@@ -130,8 +121,7 @@ implements MapComponentInitializedListener{
 			markerManager.setSelectManager(manager);
 			manager.setMarkerManager(markerManager);
 			markerManager.setVisButton(visualizationButton);
-			
-			// create components for route tab
+	
 			CLabel<geography.GeographicPoint> pointLabel = new CLabel<geography.GeographicPoint>("No point Selected.", null);
 			manager.setPointLabel(pointLabel);
 			manager.setStartLabel(startLabel);
@@ -140,7 +130,6 @@ implements MapComponentInitializedListener{
 					resetButton, visualizationButton, startButton, destinationButton, searchOptions, exportButton);
 			
 			
-			// add tabs to pane, give no option to close
 			TabPane tp = new TabPane(routeTab);
 			tp.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
@@ -152,17 +141,13 @@ implements MapComponentInitializedListener{
 			mapComponent.addMapReadyListener(() -> {
 				GeneralService gs = new GeneralService(mapComponent, manager, markerManager);
 				RouteService rs = new RouteService(mapComponent, markerManager);
-				//System.out.println("in map ready : " + this.getClass());
-				// initialize controllers
+
 				new RouteController(rs, routeButton, hideRouteButton, resetButton, startButton, destinationButton, group, searchOptions, visualizationButton,
 						startLabel, endLabel, pointLabel, manager, markerManager, exportButton);
 				new FetchController(gs, rs, tf, cb, displayButton);
 			});
 	        
-	        // pane components
 			bp.setRight(tp);
-		//	bp.setBottom(fetchControls);
-			//mapComponent.autosize();
 			mapComponent.setMaxHeight(480);
 			
 			
@@ -206,24 +191,12 @@ implements MapComponentInitializedListener{
 		setupJSAlerts(mapComponent.getWebView());
 	}
 	
-	private HBox getBottomBox(TextField tf, Button fetchButton) {
-		HBox box = new HBox();
-		tf.setPrefWidth(FETCH_COMPONENT_WIDTH);
-		box.getChildren().add(tf);
-		fetchButton.setPrefWidth(FETCH_COMPONENT_WIDTH);
-		box.getChildren().add(fetchButton);
-		return box;
-	}
-	
 	private VBox getFetchBox(Button displayButton, ComboBox<DataSet> cb) {
-		// add button to tab,  design and add V/HBox for content
 		VBox v = new VBox();
 		HBox h = new HBox();
 
 		HBox intersectionControls = new HBox();
-		//        cb.setMinWidth(displayButton.getWidth());
 		cb.setPrefWidth(FETCH_COMPONENT_WIDTH);
-//		intersectionControls.getChildren().add(cb);
 		displayButton.setPrefWidth(FETCH_COMPONENT_WIDTH);
 		intersectionControls.getChildren().add(displayButton);
 
@@ -231,7 +204,6 @@ implements MapComponentInitializedListener{
 		v.getChildren().add(new Label("Boston mini map"));
 		v.getChildren().add(intersectionControls);
 
-		//v.setSpacing(MARGIN_VAL);
 		return v;
 	}
 	
@@ -240,9 +212,7 @@ implements MapComponentInitializedListener{
 			Button showButton, Button hideButton, Button resetButton, Button vButton, Button startButton,
 			Button destButton, List<RadioButton> searchOptions, Button exportButton) {
 
-		//set up tab layout
 		HBox h = new HBox();
-		// v is inner container
 		VBox v = new VBox();
 		h.getChildren().add(v);
 
@@ -269,7 +239,6 @@ implements MapComponentInitializedListener{
 		markerBox.getChildren().add(markerLabel);
 
 		markerBox.getChildren().add(pointLabel);
-		// added map export button
 		markerBox.getChildren().add(exportButton);
 		exportButton.setDisable(true); 
 
@@ -294,10 +263,9 @@ implements MapComponentInitializedListener{
 		v.getChildren().add(vButton);
 		VBox.setMargin(showHideBox, new Insets(MARGIN_VAL,MARGIN_VAL,MARGIN_VAL,MARGIN_VAL));
 		VBox.setMargin(vButton, new Insets(MARGIN_VAL,MARGIN_VAL,MARGIN_VAL,MARGIN_VAL));
+		VBox.setMargin(exportButton,new Insets(MARGIN_VAL,MARGIN_VAL,MARGIN_VAL,MARGIN_VAL));
 		vButton.setDisable(true);
 		v.getChildren().add(markerBox);
-		//v.getChildren().add(resetButton);
-
 
 		routeTab.setContent(h);
 
@@ -325,11 +293,9 @@ implements MapComponentInitializedListener{
 	@SuppressWarnings("unchecked")
 	private <T> List<T> setupToggle(ToggleGroup group) {
 
-		// Use Dijkstra as default
 		RadioButton rbD = new RadioButton("Dijkstra");
 		rbD.setUserData("Dijkstra");
 		rbD.setSelected(true);
-//		ArraysADT arrayOps = new ArraysADT();
 
 		RadioButton rbA = new RadioButton("A*");
 		rbA.setUserData("A*");
@@ -354,7 +320,6 @@ implements MapComponentInitializedListener{
 		return ll.toStandardList();
 	}
 	
-	/* METHODS FOR ALERTS */
 	public void showLoadStage(Stage loadStage, String text) {
 		loadStage.initModality(Modality.APPLICATION_MODAL);
 		loadStage.initOwner(primaryStage);
