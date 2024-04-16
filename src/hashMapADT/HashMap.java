@@ -148,31 +148,43 @@ public class HashMap<K,V> implements HashMapADT<K,V> {
 	@Override
 	public V remove(K key) {
 		// TODO Auto-generated method stub
-		return null;
+        int index = hash(key);
+        LinkedList<Entry<K, V>> bucket = table[index];
+        if (bucket != null) {
+            for (Entry<K, V> entry : bucket) {
+                if (entry.key.equals(key)) {
+                    V value = entry.value;
+                    bucket.remove(entry);
+                    size--;
+                    return value;
+                }
+            }
+        }
+        return null;
 	}
 
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return false;
+		 return size == 0;
 	}
 
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+        for (int i = 0; i < capacity; i++) {
+            if (table[i] != null) {
+                table[i].clear();
+            }
+        }
+        size = 0;
 	}
 
-	@Override
-	public Collection<K> keySetCollect() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

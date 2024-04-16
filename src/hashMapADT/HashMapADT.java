@@ -59,10 +59,6 @@ public interface HashMapADT<K, V> {
     void clear();
     
     boolean containsValue(V value);
-
-	//Set<EntryADT<K, V>> entrySet();
-
-	Collection<K> keySetCollect();
 	
 	Set<K> keySet();
 }
