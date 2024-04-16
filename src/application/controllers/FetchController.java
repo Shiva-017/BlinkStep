@@ -45,12 +45,10 @@ public class FetchController {
     					   ComboBox<DataSet> cb, Button displayButton) {
         this.generalService = generalService;
         this.routeService = routeService;
-      //  this.fetchButton = fetchButton;
         this.displayButton = displayButton;
         this.writeFile = writeFile;
         dataChoices = cb;
         setupComboCells();
-    //    setupFetchButton();
         setupDisplayButton();
         loadDataSets();
 
@@ -112,49 +110,7 @@ public class FetchController {
         });
     }
 
-    /**
-     * Registers event to fetch data
-     */
-    private void setupFetchButton() {
-    	fetchButton.setOnAction(e -> {
-    		String fName = writeFile.getText();
-
-    		// check for valid file name ___.map or mapfiles/___.map
-    		if((generalService.checkDataFileName(fName)) != null) {
-    			if (!generalService.checkBoundsSize(.1)) {
-    				Alert alert = new Alert(AlertType.ERROR);
-        			alert.setTitle("Size Error");
-        			alert.setHeaderText("Map Size Error");
-        			alert.setContentText("Map boundaries are too large.");
-        			alert.showAndWait();
-    			} else if (!generalService.checkBoundsSize(0.02)) {
-                	Alert warning = new Alert(AlertType.CONFIRMATION);
-                	warning.setTitle("Size Warning");
-                	warning.setHeaderText("Map Size Warning");
-                	warning.setContentText("Your map file may take a long time to download,\nand your computer may crash when you try to\nload the intersections. Continue?");
-                	warning.showAndWait().ifPresent(response -> {
-                		if (response == ButtonType.OK) {
-                			generalService.runFetchTask(generalService.checkDataFileName(fName), dataChoices, fetchButton);
-                		}
-                	});
-                } else {
-                	generalService.runFetchTask(generalService.checkDataFileName(fName), dataChoices, fetchButton);
-                }
-
-
-    		}
-    		else {
-    		    Alert alert = new Alert(AlertType.ERROR);
-    			alert.setTitle("Filename Error");
-    			alert.setHeaderText("Input Error");
-    			alert.setContentText("Check filename input. \n\n\n"
-    								 + "Filename must match format : [filename].map."
-    								 + "\n\nUse only uppercase and lowercase letters,\nnumbers, and underscores in [filename].");
-
-    			alert.showAndWait();
-    		}
-    	});
-    }
+    
 
     /**
      * Registers event to fetch data
