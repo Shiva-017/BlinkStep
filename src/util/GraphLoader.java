@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +16,7 @@ import HashSetADT.HashSetADT;
 import basicgraph.Graph;
 import geography.GeographicPoint;
 import geography.RoadSegment;
+import hashMapADT.HashMap;
 import roadgraph.MapGraph;
 
 
