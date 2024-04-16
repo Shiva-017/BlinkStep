@@ -1,9 +1,10 @@
 package mapmaker;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 import javax.json.*;
+
+import hashMapADT.HashMap;
 
 public class MapMaker {
     float[] bounds;

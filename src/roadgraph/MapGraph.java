@@ -7,9 +7,7 @@ package roadgraph;
 
 
 import java.util.List;
-import java.util.Map;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedList;
@@ -18,6 +16,8 @@ import priorityQueueADT.PriorityQueue;
 import java.util.function.Consumer;
 
 import geography.GeographicPoint;
+import hashMapADT.HashMap;
+import hashMapADT.HashMapADT;
 import util.GraphLoader;
 
 /**
@@ -26,7 +26,7 @@ import util.GraphLoader;
  *
  */
 public class MapGraph {
-	private Map<GeographicPoint, MapNode> intersections;
+	private HashMapADT<GeographicPoint, MapNode> intersections;
 	private int numVertices;
 	private int numEdges;
 	
@@ -158,7 +158,7 @@ public class MapGraph {
 	{
 		Set<MapNode> visited = new HashSet<MapNode>();
 		Queue<MapNode> queue = new Queue<>();
-		Map<MapNode, MapNode> parent = new HashMap<MapNode, MapNode>();
+		HashMapADT<MapNode, MapNode> parent = new HashMap<MapNode, MapNode>();
 		
 		boolean pathFound = false;
 		
@@ -202,7 +202,7 @@ public class MapGraph {
 	 * 
 	 */
 	private List<GeographicPoint> getPath(MapNode start, MapNode goal, 
-			Map<MapNode, MapNode> parent, boolean pathFound) {
+			HashMapADT<MapNode, MapNode> parent, boolean pathFound) {
 		
 		if (pathFound == false) {
 			System.out.println("There is no path found from " + start + " to " + goal + ".");
