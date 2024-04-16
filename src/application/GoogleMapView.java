@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package gmapsfx;
+package application;
 
+import gmapsfx.MapComponentInitializedListener;
+import gmapsfx.MapNotInitializedException;
+import gmapsfx.MapReadyListener;
 import gmapsfx.javascript.JavaFxWebEngine;
 import gmapsfx.javascript.JavascriptRuntime;
 import gmapsfx.javascript.event.MapStateEventType;

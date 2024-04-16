@@ -9,23 +9,28 @@ import java.io.FileReader;
 import application.DataSet;
 import application.services.GeneralService;
 import application.services.RouteService;
+import gmapsfx.javascript.object.GoogleMap;
+import gmapsfx.javascript.object.LatLong;
+import gmapsfx.javascript.object.LatLongBounds;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
+import mapmaker.MapMaker;
 
 public class FetchController {
     private static final int ROW_COUNT = 5;
     private GeneralService generalService;
     private RouteService routeService;
     private Node container;
-    private Button fetchButton;
+//    private Button fetchButton;
     private Button displayButton;
     private ComboBox<DataSet> dataChoices;
     // maybe choice map
@@ -37,15 +42,13 @@ public class FetchController {
 
 
     public FetchController(GeneralService generalService, RouteService routeService, TextField writeFile,
-    					   Button fetchButton, ComboBox<DataSet> cb, Button displayButton) {
+    					   ComboBox<DataSet> cb, Button displayButton) {
         this.generalService = generalService;
         this.routeService = routeService;
-        this.fetchButton = fetchButton;
         this.displayButton = displayButton;
         this.writeFile = writeFile;
         dataChoices = cb;
         setupComboCells();
-        setupFetchButton();
         setupDisplayButton();
         loadDataSets();
 
@@ -102,49 +105,7 @@ public class FetchController {
         });
     }
 
-    /**
-     * Registers event to fetch data
-     */
-    private void setupFetchButton() {
-    	fetchButton.setOnAction(e -> {
-    		String fName = writeFile.getText();
-
-    		// check for valid file name ___.map or mapfiles/___.map
-    		if((generalService.checkDataFileName(fName)) != null) {
-    			if (!generalService.checkBoundsSize(.1)) {
-    				Alert alert = new Alert(AlertType.ERROR);
-        			alert.setTitle("Size Error");
-        			alert.setHeaderText("Map Size Error");
-        			alert.setContentText("Map boundaries are too large.");
-        			alert.showAndWait();
-    			} else if (!generalService.checkBoundsSize(0.02)) {
-                	Alert warning = new Alert(AlertType.CONFIRMATION);
-                	warning.setTitle("Size Warning");
-                	warning.setHeaderText("Map Size Warning");
-                	warning.setContentText("Your map file may take a long time to download,\nand your computer may crash when you try to\nload the intersections. Continue?");
-                	warning.showAndWait().ifPresent(response -> {
-                		if (response == ButtonType.OK) {
-                			generalService.runFetchTask(generalService.checkDataFileName(fName), dataChoices, fetchButton);
-                		}
-                	});
-                } else {
-                	generalService.runFetchTask(generalService.checkDataFileName(fName), dataChoices, fetchButton);
-                }
-
-
-    		}
-    		else {
-    		    Alert alert = new Alert(AlertType.ERROR);
-    			alert.setTitle("Filename Error");
-    			alert.setHeaderText("Input Error");
-    			alert.setContentText("Check filename input. \n\n\n"
-    								 + "Filename must match format : [filename].map."
-    								 + "\n\nUse only uppercase and lowercase letters,\nnumbers, and underscores in [filename].");
-
-    			alert.showAndWait();
-    		}
-    	});
-    }
+    
 
     /**
      * Registers event to fetch data

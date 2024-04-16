@@ -14,7 +14,7 @@ import application.controllers.RouteController;
 import application.mapmaker.MapMaker;
 import application.services.GeneralService;
 import application.services.RouteService;
-import gmapsfx.GoogleMapView;
+import application.GoogleMapView;
 import gmapsfx.MapComponentInitializedListener;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
@@ -79,8 +79,8 @@ implements MapComponentInitializedListener{
 			Tab routeTab = new Tab("Routing");
 			
 			// create components for fetch tab
-			Button fetchButton = new Button("Fetch Data");
-			Button displayButton = new Button("Initialize map");
+		//	Button fetchButton = new Button("Fetch Data");
+			Button displayButton = new Button("Show Intersections");
 			TextField tf = new TextField();
 			ComboBox<DataSet> cb = new ComboBox<DataSet>();
 			
@@ -89,7 +89,7 @@ implements MapComponentInitializedListener{
 				cb.requestFocus();
 			});
 
-			HBox fetchControls = getBottomBox(tf, fetchButton);
+		//	HBox fetchControls = getBottomBox(tf, fetchButton);
 
 			VBox fetchBox = getFetchBox(displayButton, cb);
 			
@@ -146,12 +146,12 @@ implements MapComponentInitializedListener{
 				// initialize controllers
 				new RouteController(rs, routeButton, hideRouteButton, resetButton, startButton, destinationButton, group, searchOptions, visualizationButton,
 						startLabel, endLabel, pointLabel, manager, markerManager);
-				new FetchController(gs, rs, tf, fetchButton, cb, displayButton);
+				new FetchController(gs, rs, tf, cb, displayButton);
 			});
 	        
 	        // pane components
 			bp.setRight(tp);
-			bp.setBottom(fetchControls);
+		//	bp.setBottom(fetchControls);
 			//mapComponent.autosize();
 			mapComponent.setMaxHeight(480);
 			
