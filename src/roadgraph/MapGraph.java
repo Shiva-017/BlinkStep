@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.PriorityQueue;
+import queueADT.Queue;
+import priorityQueueADT.PriorityQueue;
 import java.util.function.Consumer;
 
 import geography.GeographicPoint;
@@ -157,7 +157,7 @@ public class MapGraph {
 			 					     GeographicPoint goal, Consumer<GeographicPoint> nodeSearched)
 	{
 		Set<MapNode> visited = new HashSet<MapNode>();
-		Queue<MapNode> queue = new LinkedList<MapNode>();
+		Queue<MapNode> queue = new Queue<>();
 		Map<MapNode, MapNode> parent = new HashMap<MapNode, MapNode>();
 		
 		boolean pathFound = false;
@@ -165,11 +165,11 @@ public class MapGraph {
 		MapNode startNode = intersections.get(start);
 		MapNode goalNode = intersections.get(goal);
 		
-		queue.add(startNode);
+		queue.enqueue(startNode);
 		visited.add(startNode);		
 		
 		while (!queue.isEmpty()) {
-			MapNode currentNode = queue.poll();
+			MapNode currentNode = queue.dequeue();
 			nodeSearched.accept(currentNode.getLocation());
 			
 			if (currentNode.toString().equals(goalNode.toString())) {
@@ -181,7 +181,7 @@ public class MapGraph {
 				if (!visited.contains(neighbor)) {
 					visited.add(neighbor);
 					parent.put(neighbor, currentNode);
-					queue.add(neighbor);
+					queue.enqueue(neighbor);
 				}
 			}
 			
@@ -271,7 +271,7 @@ public class MapGraph {
 		int count = 0;
 		
 		while (!priorityQueue.isEmpty()) {
-			MapNode currentNode = priorityQueue.poll();
+			MapNode currentNode = priorityQueue.remove();
 			count++;
 			nodeSearched.accept(currentNode.getLocation());
 			
@@ -347,7 +347,7 @@ public class MapGraph {
 		int count = 0;
 				
 		while (!priorityQueue.isEmpty()) {
-			MapNode currentNode = priorityQueue.poll();
+			MapNode currentNode = priorityQueue.remove();
 			count++;
 			nodeSearched.accept(currentNode.getLocation());
 					
