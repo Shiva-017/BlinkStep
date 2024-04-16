@@ -51,14 +51,23 @@ implements MapComponentInitializedListener{
 	
 	/* Map View Setup */
 	protected GoogleMapView mapComponent;
-	protected GoogleMap map;
+	protected static GoogleMap map;
 	protected BorderPane bp;
-	protected Stage primaryStage;
+	protected static Stage primaryStage;
 	
 	
 	private static final double MARGIN_VAL = 10;
 	private static final double FETCH_COMPONENT_WIDTH = 160.0;
 	
+	// getter to get map
+	public static GoogleMap getMap() {
+	        return map;
+	    }
+	
+	// Getter method for primaryStage
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
     
     /* START POINT */
 	@Override
@@ -98,6 +107,7 @@ implements MapComponentInitializedListener{
 			Button hideRouteButton = new Button("Hide Route");
 			Button resetButton = new Button("Reset");
 			Button visualizationButton = new Button("Start Visualization");
+			Button exportButton = new Button("Export Map");
 			Image sImage = new Image(MarkerManager.startURL);
 			Image dImage = new Image(MarkerManager.destinationURL);
 			CLabel<geography.GeographicPoint> startLabel = new CLabel<geography.GeographicPoint>("Empty.", new ImageView(sImage), null);
@@ -127,7 +137,7 @@ implements MapComponentInitializedListener{
 			manager.setStartLabel(startLabel);
 			manager.setDestinationLabel(endLabel);
 			setupRouteTab(routeTab, fetchBox, startLabel, endLabel, pointLabel, routeButton, hideRouteButton,
-					resetButton, visualizationButton, startButton, destinationButton, searchOptions);
+					resetButton, visualizationButton, startButton, destinationButton, searchOptions, exportButton);
 			
 			
 			// add tabs to pane, give no option to close
@@ -145,7 +155,7 @@ implements MapComponentInitializedListener{
 				//System.out.println("in map ready : " + this.getClass());
 				// initialize controllers
 				new RouteController(rs, routeButton, hideRouteButton, resetButton, startButton, destinationButton, group, searchOptions, visualizationButton,
-						startLabel, endLabel, pointLabel, manager, markerManager);
+						startLabel, endLabel, pointLabel, manager, markerManager, exportButton);
 				new FetchController(gs, rs, tf, cb, displayButton);
 			});
 	        
@@ -228,7 +238,7 @@ implements MapComponentInitializedListener{
 	
 	private void setupRouteTab(Tab routeTab, VBox fetchBox, Label startLabel, Label endLabel, Label pointLabel,
 			Button showButton, Button hideButton, Button resetButton, Button vButton, Button startButton,
-			Button destButton, List<RadioButton> searchOptions) {
+			Button destButton, List<RadioButton> searchOptions, Button exportButton) {
 
 		//set up tab layout
 		HBox h = new HBox();
@@ -256,10 +266,12 @@ implements MapComponentInitializedListener{
 		VBox markerBox = new VBox();
 		Label markerLabel = new Label("Selected Marker : ");
 
-
 		markerBox.getChildren().add(markerLabel);
 
 		markerBox.getChildren().add(pointLabel);
+		// added map export button
+		markerBox.getChildren().add(exportButton);
+		exportButton.setDisable(true); 
 
 		VBox.setMargin(markerLabel, new Insets(MARGIN_VAL,MARGIN_VAL,MARGIN_VAL,MARGIN_VAL));
 		VBox.setMargin(pointLabel, new Insets(0,MARGIN_VAL,MARGIN_VAL,MARGIN_VAL));

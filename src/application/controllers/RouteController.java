@@ -1,14 +1,29 @@
 package application.controllers;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
 import application.MarkerManager;
 import application.SelectManager;
 import application.CLabel;
 import application.MapApp;
 import application.services.RouteService;
+import gmapsfx.javascript.object.GoogleMap;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class RouteController {
 	// Strings for slider labels
@@ -28,6 +43,7 @@ public class RouteController {
     private Button resetButton;
     private Button destinationButton;
     private Button visualizationButton;
+    private Button exportButton;
 
     private ToggleGroup group;
     private CLabel<geography.GeographicPoint> startLabel;
@@ -42,7 +58,7 @@ public class RouteController {
 						   Button resetButton, Button startButton, Button destinationButton,
 						   ToggleGroup group, List<RadioButton> searchOptions, Button visualizationButton,
 						   CLabel<geography.GeographicPoint> startLabel, CLabel<geography.GeographicPoint> endLabel,
-						   CLabel<geography.GeographicPoint> pointLabel, SelectManager manager, MarkerManager markerManager) {
+						   CLabel<geography.GeographicPoint> pointLabel, SelectManager manager, MarkerManager markerManager, Button exportButton) {
         // save parameters
         this.routeService = routeService;
 		this.displayButton = displayButton;
@@ -52,6 +68,7 @@ public class RouteController {
 		this.destinationButton = destinationButton;
         this.group = group;
         this.visualizationButton = visualizationButton;
+        this.exportButton = exportButton;
 
         // maybe don't need references to labels;
 		this.startLabel = startLabel;
@@ -73,6 +90,11 @@ public class RouteController {
 		displayButton.setOnAction(e -> {
             if(startLabel.getItem() != null && endLabel.getItem() != null) {
         			routeService.displayRoute(startLabel.getItem(), endLabel.getItem(), selectedToggle);
+        			 // enable export button if map displaying is succesful
+        		    exportButton.setDisable(false);
+        		    exportButton.setOnAction(ex -> {
+        		    	exportMap();
+        		    });
             }
             else {
             	MapApp.showErrorAlert("Route Display Error", "Make sure to choose points for both start and destination.");
@@ -83,12 +105,45 @@ public class RouteController {
         	routeService.hideRoute();
         });
 
-        //TODO -- implement
         resetButton.setOnAction( e -> {
 
             routeService.reset();
         });
 	}
+	
+	
+
+	private void exportMap() {
+	    // Capture the current state of the map as an image
+	    
+		BorderPane root = (BorderPane)MapApp.getPrimaryStage().getScene().getRoot();
+
+	 // Get the center component (assuming it's where your map is located)
+	    Node centerComponent = root.getCenter();
+	    SnapshotParameters parameters = new SnapshotParameters();
+	    parameters.setFill(Color.TRANSPARENT); 
+
+	    WritableImage sceneImage = new WritableImage((int) centerComponent.getBoundsInLocal().getWidth(), (int) centerComponent.getBoundsInLocal().getHeight());
+
+	    root.snapshot(parameters, sceneImage);
+
+	    FileChooser fileChooser = new FileChooser();
+	    fileChooser.setInitialFileName("map_export.png");
+	    File file = fileChooser.showSaveDialog(MapApp.getPrimaryStage()); 
+
+	    if (file != null) {
+	        try {
+	            ImageIO.write(SwingFXUtils.fromFXImage(sceneImage, null), "png", file);
+	            System.out.println("Map exported successfully.");
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            System.err.println("Failed to export the map.");
+	        }
+	    }
+	}
+
+
+
 
     private void setupVisualizationButton() {
     	visualizationButton.setOnAction( e -> {
