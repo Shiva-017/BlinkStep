@@ -7,13 +7,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import HashSetADT.HashSetADT;
 import basicgraph.Graph;
 import geography.GeographicPoint;
 import geography.RoadSegment;
@@ -39,7 +39,8 @@ public class GraphLoader implements GraphLoaderInterface
 	 */
 	public void createIntersectionsFile(String roadDataFile, String intersectionsFile)
 	{
-		Collection<GeographicPoint> nodes = new HashSet<GeographicPoint>();
+		@SuppressWarnings("unchecked")
+		HashSetADT<GeographicPoint> nodes = new HashSetADT<GeographicPoint>();
         HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap = 
         		buildPointMapOneWay(roadDataFile);
 		
@@ -56,7 +57,7 @@ public class GraphLoader implements GraphLoaderInterface
 				List<LinkedList<RoadLineInfo>> inAndOut = pointMap.get(pt);
 				LinkedList<RoadLineInfo> outgoing = inAndOut.get(0);
 				for (RoadLineInfo info : outgoing) {
-					HashSet<GeographicPoint> used = new HashSet<GeographicPoint>();
+					HashSetADT<GeographicPoint> used = new HashSetADT<GeographicPoint>();
 					used.add(pt);
 				
 					List<GeographicPoint> pointsOnEdge = 
@@ -121,10 +122,11 @@ public class GraphLoader implements GraphLoaderInterface
 	 *   assumed to be directed.
 	 */
 	public  void loadRoadMap(String filename, roadgraph.MapGraph map,  
-			HashMap<GeographicPoint,HashSet<RoadSegment>> segments, 
+			HashMap<GeographicPoint,HashSetADT<RoadSegment>> segments, 
 			Set<GeographicPoint> intersectionsToLoad)
 	{
-		Collection<GeographicPoint> nodes = new HashSet<GeographicPoint>();
+		@SuppressWarnings("unchecked")
+		HashSetADT<GeographicPoint> nodes = new HashSetADT<GeographicPoint>();
         HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap = 
         		buildPointMapOneWay(filename);
 		
@@ -294,29 +296,29 @@ public class GraphLoader implements GraphLoaderInterface
 	}
 	
 
-	private static void addEdgesAndSegments(Collection<GeographicPoint> nodes, 
+	private static void addEdgesAndSegments(HashSetADT<GeographicPoint> nodes, 
 			HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap,
 			MapGraph map, 
-			HashMap<GeographicPoint,HashSet<RoadSegment>> segments)
+			HashMap<GeographicPoint,HashSetADT<RoadSegment>> segments)
 	{
 	
 		for (GeographicPoint pt : nodes) {
 			List<LinkedList<RoadLineInfo>> inAndOut = pointMap.get(pt);
 			LinkedList<RoadLineInfo> outgoing = inAndOut.get(0);
 			for (RoadLineInfo info : outgoing) {
-				HashSet<GeographicPoint> used = new HashSet<GeographicPoint>();
+				HashSetADT<GeographicPoint> used = new HashSetADT<GeographicPoint>();
 				used.add(pt);
 				
 				List<GeographicPoint> pointsOnEdge = 
-						findPointsOnEdge(pointMap, info, nodes);
+						findPointsOnEdge(pointMap, info, (HashSetADT<GeographicPoint>) nodes);
 				GeographicPoint end = pointsOnEdge.remove(pointsOnEdge.size()-1);
 				double length = getRoadLength(pt, end, pointsOnEdge);
 				map.addEdge(pt, end, info.roadName, info.roadType, length);
 
 				if (segments != null) {
-					HashSet<RoadSegment> segs = segments.get(pt);
+					HashSetADT<RoadSegment> segs = segments.get(pt);
 					if (segs == null) {
-						segs = new HashSet<RoadSegment>();
+						segs = new HashSetADT<RoadSegment>();
 						segments.put(pt,segs);
 					}
 					RoadSegment seg = new RoadSegment(pt, end, pointsOnEdge, 
@@ -324,7 +326,7 @@ public class GraphLoader implements GraphLoaderInterface
 					segs.add(seg);
 					segs = segments.get(end);
 					if (segs == null) {
-						segs = new HashSet<RoadSegment>();
+						segs = new HashSetADT<RoadSegment>();
 						segments.put(end,segs);
 					}
 					segs.add(seg);
@@ -349,7 +351,7 @@ public class GraphLoader implements GraphLoaderInterface
 	
 	private static List<GeographicPoint>
 	findPointsOnEdge(HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap,
-		RoadLineInfo info, Collection<GeographicPoint> nodes) 
+		RoadLineInfo info, HashSetADT<GeographicPoint> nodes) 
 	{
 		List<GeographicPoint> toReturn = new LinkedList<GeographicPoint>();
 		GeographicPoint pt = info.point1;
@@ -552,8 +554,7 @@ public class GraphLoader implements GraphLoaderInterface
 	{
 		
 		GraphLoader graphLoader = new GraphLoader();
-	//	graphLoader.createIntersectionsFile("data/maps/boston_coordinates.map", "data/intersections/boston.intersections");
-
+		graphLoader.createIntersectionsFile("data/maps/boston_coordinates.map", "data/maps/boston.intersections");
 	}
 	
 }	

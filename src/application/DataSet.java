@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import HashSetADT.HashSetADT;
 import geography.GeographicPoint;
 import util.GraphLoader;
 
@@ -15,7 +16,7 @@ public class DataSet {
 	String filePath;
 	roadgraph.MapGraph graph;
 	Set<GeographicPoint> intersections;
-    private HashMap<geography.GeographicPoint,HashSet<geography.RoadSegment>>  roads;
+    private HashMap<geography.GeographicPoint,HashSetADT<geography.RoadSegment>>  roads;
 	boolean currentlyDisplayed;
 
 	public DataSet (String path) {
@@ -29,7 +30,7 @@ public class DataSet {
     	this.graph = graph;
     }
 
-    public void setRoads(HashMap<geography.GeographicPoint,HashSet<geography.RoadSegment>>  roads) { this.roads = roads; }
+    public void setRoads(HashMap<geography.GeographicPoint,HashSetADT<geography.RoadSegment>>  roads) { this.roads = roads; }
     public roadgraph.MapGraph getGraph(){ return graph; }
     
     /** Return the intersections in this graph.
@@ -49,11 +50,11 @@ public class DataSet {
     	}
     }
     
-    public HashMap<geography.GeographicPoint,HashSet<geography.RoadSegment>>  getRoads() { return this.roads; }
+    public HashMap<geography.GeographicPoint,HashSetADT<geography.RoadSegment>>  getRoads() { return this.roads; }
 
     public void initializeGraph() {
         graph = new roadgraph.MapGraph();
-        roads = new HashMap<geography.GeographicPoint, HashSet<geography.RoadSegment>>();
+        roads = new HashMap<geography.GeographicPoint, HashSetADT<geography.RoadSegment>>();
         intersections = new HashSet<GeographicPoint>();
         GraphLoader graphLoader = new GraphLoader();
     	graphLoader.loadRoadMap(filePath, graph, roads, intersections);

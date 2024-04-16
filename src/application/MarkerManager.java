@@ -3,13 +3,12 @@
 
 package application;
 
-import java.util.ArrayList;
+import ArrayListADT.ArrayListADT;
+
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import gmapsfx.javascript.event.UIEventType;
-import gmapsfx.javascript.object.Animation;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.Marker;
@@ -25,7 +24,7 @@ public class MarkerManager {
     private static final double STRTDEST_Z = 3;
 
     private HashMap<geography.GeographicPoint, Marker> markerMap;
-    private ArrayList<geography.GeographicPoint> markerPositions;
+    private ArrayListADT<geography.GeographicPoint> markerPositions;
     private GoogleMap map;
     protected static String startURL = "http://maps.google.com/mapfiles/kml/pal3/icon40.png";
     protected static String destinationURL = "http://maps.google.com/mapfiles/kml/pal2/icon5.png";
@@ -187,7 +186,7 @@ public class MarkerManager {
     	}
     }
     public void displayDataSet() {
-        markerPositions = new ArrayList<geography.GeographicPoint>();
+        markerPositions = new ArrayListADT<geography.GeographicPoint>();
         dataSet.initializeGraph();
     	Iterator<geography.GeographicPoint>it = dataSet.getIntersections().iterator();
         bounds = new LatLongBounds();

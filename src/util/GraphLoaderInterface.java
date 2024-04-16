@@ -1,9 +1,9 @@
 package util;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 
+import HashSetADT.HashSetADT;
 import basicgraph.Graph;
 import geography.GeographicPoint;
 import geography.RoadSegment;
@@ -41,7 +41,7 @@ public interface GraphLoaderInterface {
      * @param segments The collection of RoadSegments defining the shape of roads.
      * @param intersectionsToLoad The set of intersections to load.
      */
-    public void loadRoadMap(String filename, MapGraph map, HashMap<GeographicPoint, HashSet<RoadSegment>> segments, Set<GeographicPoint> intersectionsToLoad);
+    public void loadRoadMap(String filename, MapGraph map, HashMap<GeographicPoint, HashSetADT<RoadSegment>> segments, Set<GeographicPoint> intersectionsToLoad);
 
     /** Loads a road map into a Graph.
      * This method reads road data from a file and constructs a Graph 
