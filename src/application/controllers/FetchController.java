@@ -52,20 +52,15 @@ public class FetchController {
     }
 
     private void loadDataSets() {
-    	try {
-			BufferedReader reader = new BufferedReader(new FileReader(persistPath));
-            String line = reader.readLine();
-            while(line != null) {
-            	dataChoices.getItems().add(new DataSet(GeneralService.getDataSetDirectory() + line));
-                line = reader.readLine();
-            }
+    	String line = "boston_coordinates.map";
 
-            reader.close();
-		} catch (IOException e) {
-            // System.out.println("No existing map files found.");
-			e.printStackTrace();
-		}
+    	DataSet defaultDataSet = new DataSet(GeneralService.getDataSetDirectory() + line);
+        dataChoices.getItems().add(defaultDataSet);
+        
+        // Set the ComboBox value to the default dataset
+        dataChoices.setValue(defaultDataSet);
     }
+    
     private void setupComboCells() {
     	//dataChoices.setVisibleRowCount(ROW_COUNT);
     	dataChoices.setCellFactory(new Callback<ListView<DataSet>, ListCell<DataSet>>() {
