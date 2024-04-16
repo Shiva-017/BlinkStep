@@ -59,7 +59,6 @@ implements MapComponentInitializedListener{
 	private static final double MARGIN_VAL = 10;
 	private static final double FETCH_COMPONENT_WIDTH = 160.0;
 	
-    private String persistPath = "data/maps/mapfiles.list";
     
     /* START POINT */
 	@Override
@@ -214,12 +213,12 @@ implements MapComponentInitializedListener{
 		HBox intersectionControls = new HBox();
 		//        cb.setMinWidth(displayButton.getWidth());
 		cb.setPrefWidth(FETCH_COMPONENT_WIDTH);
-		intersectionControls.getChildren().add(cb);
+//		intersectionControls.getChildren().add(cb);
 		displayButton.setPrefWidth(FETCH_COMPONENT_WIDTH);
 		intersectionControls.getChildren().add(displayButton);
 
 		h.getChildren().add(v);
-		v.getChildren().add(new Label("Choose map file : "));
+		v.getChildren().add(new Label("Boston mini map"));
 		v.getChildren().add(intersectionControls);
 
 		//v.setSpacing(MARGIN_VAL);

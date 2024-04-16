@@ -26,9 +26,9 @@ public class MarkerManager {
     private HashMap<geography.GeographicPoint, Marker> markerMap;
     private ArrayListADT<geography.GeographicPoint> markerPositions;
     private GoogleMap map;
-    protected static String startURL = "http://maps.google.com/mapfiles/kml/pal3/icon40.png";
-    protected static String destinationURL = "http://maps.google.com/mapfiles/kml/pal2/icon5.png";
-    protected static String SELECTED_URL = "http://maps.google.com/mapfiles/kml/paddle/ltblu-circle.png";
+    protected static String startURL = "https://img.icons8.com/color/28/000000/marker--v1.png";
+    protected static String destinationURL = "https://img.icons8.com/fluency/30/order-delivered.png";
+    protected static String SELECTED_URL = "https://img.icons8.com/external-sbts2018-mixed-sbts2018/28/external-03-gps-ecommerce-basic-1-sbts2018-mixed-sbts2018-2.png";
     protected static String markerURL = "http://maps.google.com/mapfiles/kml/paddle/blu-diamond-lv.png";
 	protected static String visURL = "http://maps.google.com/mapfiles/kml/paddle/red-diamond-lv.png";
     private Marker startMarker;
