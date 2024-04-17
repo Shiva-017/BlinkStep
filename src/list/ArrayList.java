@@ -1,18 +1,22 @@
-package arrayList;
+package list;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class ArrayListADT<T> implements ArrayListADTInterface<T> {
+public class ArrayList<T> implements ListADT<T> {
 	private Object[] elements;
     private int size = 0;
     private static final int DEFAULT_CAPACITY = 10;
 
-    public ArrayListADT() {
+    public ArrayList() {
         elements = new Object[DEFAULT_CAPACITY];
     }
     
-    public ArrayListADT(List<T> items) {
+    public ArrayList(int size) {
+        elements = new Object[size];
+    }
+    
+    public ArrayList(ListADT<T> items) {
         elements = new Object[DEFAULT_CAPACITY];
         for(int i=0; i<items.size(); i++) {
         	this.add(items.get(i));
@@ -39,21 +43,6 @@ public class ArrayListADT<T> implements ArrayListADTInterface<T> {
         }
         return (T) elements[index];
     }
-
-//    @Override
-//    public boolean remove(T item) {
-//        for (int i = 0; i < size; i++) {
-//            if (item.equals(elements[i])) {
-//                int numMoved = size - i - 1;
-//                if (numMoved > 0) {
-//                    System.arraycopy(elements, i + 1, elements, i, numMoved);
-//                }
-//                elements[--size] = null; // clear to let GC do its work
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
     
     @Override
     public T remove(int n) {
@@ -100,5 +89,42 @@ public class ArrayListADT<T> implements ArrayListADTInterface<T> {
             elements = newBiggerArray;
         }
     }
+
+	@Override
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+        return new Iterator<T>() {
+            private int currentIndex = 0;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < size;
+            }
+
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return (T) elements[currentIndex++];
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException("Remove not supported");
+            }
+        };
+	}
+
+	@Override
+	public ListADT<T> toStandardList() {
+		// TODO Auto-generated method stub
+        ListADT<T> standardList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            standardList.add(this.get(i));
+        }
+        return standardList;
+	}
+
 
 }

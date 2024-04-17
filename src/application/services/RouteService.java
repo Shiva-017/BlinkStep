@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import application.DataSet;
-import hashSet.HashSetADT;
+import hashSet.HashSet;
 import application.GoogleMapView;
 import application.MapApp;
 import application.MarkerManager;
@@ -18,7 +18,7 @@ import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.LatLongBounds;
 import gmapsfx.javascript.object.MVCArray;
 import gmapsfx.shapes.Polyline;
-import hashSet.HashSetADT;
+import hashSet.HashSet;
 
 public class RouteService {
 	private GoogleMap map;
@@ -138,7 +138,7 @@ public class RouteService {
         	next = path.get(i+1);
 
         	if(markerManager.getDataSet().getRoads().containsKey(curr)) {
-        		HashSetADT<geography.RoadSegment> segments = markerManager.getDataSet().getRoads().get(curr);
+        		HashSet<geography.RoadSegment> segments = markerManager.getDataSet().getRoads().get(curr);
         		Iterator<geography.RoadSegment> it = segments.iterator();
 
             	geography.RoadSegment currSegment;

@@ -5,7 +5,6 @@ package application;
 
 import java.util.Iterator;
 
-import arrayList.ArrayListADT;
 import gmapsfx.javascript.event.UIEventType;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
@@ -13,13 +12,14 @@ import gmapsfx.javascript.object.Marker;
 import gmapsfx.javascript.object.MarkerOptions;
 import hashMap.HashMap;
 import javafx.scene.control.Button;
+import list.ArrayList;
 import gmapsfx.javascript.object.LatLongBounds;
 import netscape.javascript.JSObject;
 
 public class MarkerManager {
 
     private HashMap<geography.GeographicPoint, Marker> markerMap;
-    private ArrayListADT<geography.GeographicPoint> markerPositions;
+    private ArrayList<geography.GeographicPoint> markerPositions;
     private GoogleMap map;
     protected static String startURL = "https://img.icons8.com/color/28/000000/marker--v1.png";
     protected static String destinationURL = "https://img.icons8.com/fluency/30/order-delivered.png";
@@ -182,7 +182,7 @@ public class MarkerManager {
     	}
     }
     public void displayDataSet() {
-        markerPositions = new ArrayListADT<geography.GeographicPoint>();
+        markerPositions = new ArrayList<geography.GeographicPoint>();
         dataSet.initializeGraph();
     	Iterator<geography.GeographicPoint>it = dataSet.getIntersections().iterator();
         bounds = new LatLongBounds();

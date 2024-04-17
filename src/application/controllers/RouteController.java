@@ -2,7 +2,6 @@ package application.controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -22,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import list.ListADT;
 
 public class RouteController {
 	// Strings for slider labels
@@ -55,7 +55,7 @@ public class RouteController {
 
 	public RouteController(RouteService routeService, Button displayButton, Button hideButton,
 						   Button resetButton, Button startButton, Button destinationButton,
-						   ToggleGroup group, List<RadioButton> searchOptions, Button visualizationButton,
+						   ToggleGroup group, ListADT<RadioButton> searchOptions, Button visualizationButton,
 						   CLabel<geography.GeographicPoint> startLabel, CLabel<geography.GeographicPoint> endLabel,
 						   CLabel<geography.GeographicPoint> pointLabel, SelectManager manager, MarkerManager markerManager, Button exportButton) {
         this.routeService = routeService;
