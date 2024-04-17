@@ -3,6 +3,7 @@
 
 package application;
 import geography.GeographicPoint;
+import util.GraphLoader;
 import gmapsfx.javascript.object.Marker;
 
 public class SelectManager {
@@ -14,6 +15,7 @@ public class SelectManager {
     private Marker selectedMarker;
     private MarkerManager markerManager;
     private DataSet dataSet;
+    
 
 
     public SelectManager() {
@@ -47,8 +49,8 @@ public class SelectManager {
 
     public void setMarkerManager(MarkerManager manager) { this.markerManager = manager; }
     public void setPoint(GeographicPoint point, Marker marker) {
-        // System.out.println("inSetPoint.. passed : " + point);
-    	pointLabel.setItem(point);
+         String street = GraphLoader.findStreetName(point.x, point.y);
+    	pointLabel.setItemWithName(point, street);
         selectedMarker = marker;
     }
     public void setDataSet(DataSet dataSet) {
