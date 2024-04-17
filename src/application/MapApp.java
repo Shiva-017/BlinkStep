@@ -5,8 +5,6 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
-import LinkedListADT.LinkedListADT;
-
 import java.util.List;
 
 import application.controllers.FetchController;
@@ -22,6 +20,7 @@ import gmapsfx.javascript.object.MapTypeIdEnum;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import linkedList.LinkedListADT;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

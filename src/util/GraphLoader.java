@@ -12,11 +12,11 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import HashSetADT.HashSetADT;
-import basicgraph.Graph;
 import geography.GeographicPoint;
 import geography.RoadSegment;
-import hashMapADT.HashMap;
+import graph.Graph;
+import hashMap.HashMap;
+import hashSet.HashSetADT;
 import roadgraph.MapGraph;
 
 
@@ -162,7 +162,7 @@ public class GraphLoader implements GraphLoaderInterface
 	 * @param theGraph The graph to load the map into.  The graph is
 	 *   assumed to be directed.
 	 */
-	public void loadRoadMap(String filename, basicgraph.Graph theGraph)
+	public void loadRoadMap(String filename, graph.Graph theGraph)
 	{
 		HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap = 
         		buildPointMapOneWay(filename);
@@ -267,7 +267,7 @@ public class GraphLoader implements GraphLoaderInterface
 	 * @param filename The file containing the graph
 	 * @param theGraph The graph to be loaded
 	 */
-	public void loadGraph(String filename, basicgraph.Graph theGraph)
+	public void loadGraph(String filename, graph.Graph theGraph)
 	{
 		BufferedReader reader = null;
         try {
@@ -382,7 +382,7 @@ public class GraphLoader implements GraphLoaderInterface
 
 	private static GeographicPoint
 	findEndOfEdge(HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap,
-		RoadLineInfo info, basicgraph.Graph graph, 
+		RoadLineInfo info, graph.Graph graph, 
 		HashMap<GeographicPoint, Integer> reverseMap) 
 	{
 		

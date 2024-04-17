@@ -1,4 +1,4 @@
-package HashSetADT;
+package hashSet;
 
 import java.util.Iterator;
 

@@ -1,4 +1,4 @@
-package priorityQueueADT;
+package priorityQueue;
 
 import java.util.ArrayList;
 import java.util.List;

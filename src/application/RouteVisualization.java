@@ -3,7 +3,7 @@
 
 package application;
 
-import ArrayListADT.ArrayListADT;
+import arrayList.ArrayListADT;
 import geography.GeographicPoint;
 
 import gmapsfx.javascript.IJavascriptRuntime;

@@ -1,4 +1,4 @@
-package priorityQueueADT;
+package priorityQueue;
 
 // Interface for a generic priority queue ADT
 public interface PriorityQueueADT<T extends Comparable<T>> {

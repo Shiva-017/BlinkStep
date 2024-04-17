@@ -1,4 +1,4 @@
-package basicgraph;
+package graph;
 
 import java.util.List;
 
