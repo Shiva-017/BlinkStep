@@ -3,7 +3,6 @@
 
 package application;
 
-import arrayList.ArrayListADT;
 import geography.GeographicPoint;
 
 import gmapsfx.javascript.IJavascriptRuntime;
@@ -13,19 +12,20 @@ import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.LatLongBounds;
 import gmapsfx.javascript.object.Marker;
 import gmapsfx.javascript.object.MarkerOptions;
+import list.ArrayList;
 
 
 public class RouteVisualization {
-	ArrayListADT<GeographicPoint> points;
-    ArrayListADT<Marker> markerList;
+	ArrayList<GeographicPoint> points;
+    ArrayList<Marker> markerList;
 	MarkerManager manager;
 	JavascriptArray markers;
     IJavascriptRuntime runtime;
 
 
 	public RouteVisualization(MarkerManager manager) {
-        points = new ArrayListADT<geography.GeographicPoint>();
-        markerList = new ArrayListADT<Marker>();
+        points = new ArrayList<geography.GeographicPoint>();
+        markerList = new ArrayList<Marker>();
 		this.manager = manager;
 
 	}

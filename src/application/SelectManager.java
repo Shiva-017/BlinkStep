@@ -11,8 +11,6 @@ public class SelectManager {
     private CLabel<GeographicPoint> startLabel;
     private CLabel<GeographicPoint> destinationLabel;
     private MarkerManager markerManager;
-    private DataSet dataSet;
-    
 
 
     public SelectManager() {

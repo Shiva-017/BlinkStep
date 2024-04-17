@@ -1,99 +1,50 @@
 package hashSet;
 
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
-public class HashSetADT<T> implements HashSetADTInterface<T>,Iterable<T> {
-	private LinkedList<T>[] buckets;
-    private int capacity=10;  // Total number of buckets
-    private int size;      // Total number of elements in the hash set
+public interface HashSetADT<T> {
+	 /**
+     * Adds an element to the set if it is not already present.
+     * 
+     * @param element the element to add
+     * @return true if the set did not already contain the specified element
+     */
+    void add(T element);
 
-    @SuppressWarnings("unchecked")
-    public HashSetADT(int capacity) {
-        this.capacity = capacity;
-        this.buckets = new LinkedList[capacity];
-        for (int i = 0; i < capacity; i++) {
-            buckets[i] = new LinkedList<>();
-        }
-    }
-    
-    public HashSetADT() {
-        this.buckets = new LinkedList[capacity];
-        for (int i = 0; i < capacity; i++) {
-            buckets[i] = new LinkedList<>();
-        }
-    }
+    /**
+     * Removes the specified element from this set if it is present.
+     * 
+     * @param element the element to remove
+     * @return true if the set contained the specified element
+     */
+    boolean remove(T element);
 
-    private int getBucketIndex(T key) {
-        int hashCode = key.hashCode();
-        return Math.abs(hashCode) % capacity;
-    }
+    /**
+     * Returns true if this set contains the specified element.
+     * 
+     * @param element the element whose presence in this set is to be tested
+     * @return true if this set contains the specified element
+     */
+    boolean contains(T element);
 
-    public void add(T key) {
-        int bucketIndex = getBucketIndex(key);
-        LinkedList<T> bucket = buckets[bucketIndex];
-        if (!bucket.contains(key)) {
-            bucket.add(key);
-            size++;
-        }
-    }
+    /**
+     * Returns the number of elements in this set (its cardinality).
+     * 
+     * @return the number of elements in this set
+     */
+    int size();
 
-    public boolean contains(T key) {
-        int bucketIndex = getBucketIndex(key);
-        LinkedList<T> bucket = buckets[bucketIndex];
-        return bucket.contains(key);
-    }
+    /**
+     * Returns an iterator over the elements in this set.
+     * 
+     * @return an Iterator over the elements in this set
+     */
+    Iterator<T> iterator();
 
-    @Override
-    public Iterator<T> iterator() {
-        return new Iterator<T>() {
-            private int currentBucket = 0;
-            private Iterator<T> bucketIterator = (buckets[currentBucket] != null) ? buckets[currentBucket].iterator() : Collections.<T>emptyIterator();
+    /**
+     * Removes all of the elements from this set.
+     */
+    void clear();
 
-            @Override
-            public boolean hasNext() {
-                // Ensures that we move to the next non-empty bucket
-                while ((bucketIterator == null || !bucketIterator.hasNext()) && currentBucket < capacity - 1) {
-                    currentBucket++;
-                    if (buckets[currentBucket] != null) {
-                        bucketIterator = buckets[currentBucket].iterator();
-                    }
-                }
-                return bucketIterator != null && bucketIterator.hasNext();
-            }
-
-            @Override
-            public T next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                return bucketIterator.next();
-            }
-
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException("Remove operation is not supported");
-            }
-        };
-    }
-        
-	@Override
-	public boolean remove(T element) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
+	Object[] toArray();
 }

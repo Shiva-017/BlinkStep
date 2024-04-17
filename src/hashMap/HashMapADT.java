@@ -1,7 +1,9 @@
 package hashMap;
 
-import java.util.Collection;
-import java.util.Set;
+
+import hashMap.HashMap.Entry;
+import hashSet.HashSet;
+import hashSet.HashSetADT;
 
 public interface HashMapADT<K, V> {
     /**
@@ -60,5 +62,7 @@ public interface HashMapADT<K, V> {
     
     boolean containsValue(V value);
 	
-	Set<K> keySet();
+	HashSet<K> keySet();
+
+	HashSet<Entry<K, V>> entrySet();
 }

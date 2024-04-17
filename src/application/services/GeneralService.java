@@ -15,6 +15,7 @@ import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import list.ArrayList;
 import mapmaker.MapMaker;
 
 // class for map and general application services (file IO, etc.)
@@ -29,7 +30,7 @@ public class GeneralService {
     private static final String DATA_FILE_PATTERN = "[\\w_]+.map";
     private static final String DATA_FILE_DIR_STR = "data/maps/";
 
-    private ArrayListADT<String> filenames;
+    private ArrayList<String> filenames;
     DataSet dataSet;
 
     public GeneralService(GoogleMapView mapComponent, SelectManager selectManager, MarkerManager markerManager) {
@@ -37,7 +38,7 @@ public class GeneralService {
     	this.selectManager = selectManager;
         this.markerManager = markerManager;
         this.markerManager.setMap(map);
-    	filenames = new ArrayListADT<String>();
+    	filenames = new ArrayList<String>();
 
     }
 
@@ -166,7 +167,7 @@ public class GeneralService {
 
 
 
-    public ArrayListADT<String> getDataFiles() {
+    public ArrayList<String> getDataFiles() {
     	return filenames;
     }
 

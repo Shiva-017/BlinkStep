@@ -2,14 +2,16 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import hashMap.HashMap;
+import hashMap.HashMapADT;
 
 public abstract class Graph implements GraphADT {
     private int numVertices;
     private int numEdges;
-    private Map<Integer, String> vertexLabels;
+    private HashMap<Integer, String> vertexLabels;
 
     public Graph() {
         numVertices = 0;
@@ -97,7 +99,7 @@ public abstract class Graph implements GraphADT {
     }
 
     public int getIndex(String s) {
-        for (Map.Entry<Integer, String> entry : vertexLabels.entrySet()) {
+        for (HashMap.Entry<Integer, String> entry : vertexLabels.entrySet()) {
             if (entry.getValue().equals(s))
                 return entry.getKey();
         }

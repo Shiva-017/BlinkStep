@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
-import java.util.List;
 
 import application.controllers.FetchController;
 import application.controllers.RouteController;
@@ -20,7 +19,8 @@ import gmapsfx.javascript.object.MapTypeIdEnum;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import linkedList.LinkedListADT;
+import list.LinkedListADT;
+import list.ListADT;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -112,7 +112,7 @@ implements MapComponentInitializedListener{
 			final ToggleGroup group = new ToggleGroup();
 			
 			@SuppressWarnings("unchecked")
-			List<RadioButton> searchOptions = setupToggle(group);
+			ListADT<RadioButton> searchOptions = setupToggle(group);
 
 		
 			SelectManager manager = new SelectManager();
@@ -208,7 +208,7 @@ implements MapComponentInitializedListener{
 	
 	private void setupRouteTab(Tab routeTab, VBox fetchBox, Label startLabel, Label endLabel, Label pointLabel,
 			Button showButton, Button hideButton, Button resetButton, Button vButton, Button startButton,
-			Button destButton, List<RadioButton> searchOptions, Button exportButton) {
+			Button destButton, ListADT<RadioButton> searchOptions, Button exportButton) {
 
 		HBox h = new HBox();
 		VBox v = new VBox();
@@ -289,7 +289,7 @@ implements MapComponentInitializedListener{
 	}
 	
 	@SuppressWarnings("unchecked")
-	private <T> List<T> setupToggle(ToggleGroup group) {
+	private <T> ListADT<T> setupToggle(ToggleGroup group) {
 
 		RadioButton rbD = new RadioButton("Dijkstra");
 		rbD.setUserData("Dijkstra");
