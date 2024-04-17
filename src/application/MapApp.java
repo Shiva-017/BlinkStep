@@ -73,7 +73,7 @@ implements MapComponentInitializedListener{
 		this.primaryStage = primaryStage;
 		try {
 			//boston boundaries
-	        float[] bound_arr = new float[] {42.35f, -71.08f, 42.36f, -71.07f};
+	        float[] bound_arr = new float[] {42.35f, -71.09f, 42.37f, -71.07f};;
 	        
 	        // MAIN CONTAINER
 	        bp = new BorderPane();
