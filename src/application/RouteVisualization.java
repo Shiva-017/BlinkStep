@@ -3,7 +3,7 @@
 
 package application;
 
-import ArrayListADT.ArrayListADT;
+import arrayList.ArrayListADT;
 import geography.GeographicPoint;
 
 import gmapsfx.javascript.IJavascriptRuntime;
@@ -39,7 +39,6 @@ public class RouteVisualization {
     public void startVisualization() {
 
     	LatLongBounds bounds = new LatLongBounds();
-//    	List<LatLong> latLongs = new ArrayListADT<LatLong>();
     	JavascriptArray jsArray = new JavascriptArray();
     	manager.hideIntermediateMarkers();
         manager.hideDestinationMarker();
@@ -72,6 +71,4 @@ public class RouteVisualization {
             marker.setVisible(false);
         }
     }
-
-
 }

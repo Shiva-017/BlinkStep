@@ -3,25 +3,20 @@
 
 package application;
 
-import ArrayListADT.ArrayListADT;
-
-import java.util.HashMap;
 import java.util.Iterator;
 
+import arrayList.ArrayListADT;
 import gmapsfx.javascript.event.UIEventType;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.Marker;
 import gmapsfx.javascript.object.MarkerOptions;
+import hashMap.HashMap;
 import javafx.scene.control.Button;
 import gmapsfx.javascript.object.LatLongBounds;
 import netscape.javascript.JSObject;
 
 public class MarkerManager {
-
-    private static final double DEFAULT_Z = 2;
-    private static final double SELECT_Z = 1;
-    private static final double STRTDEST_Z = 3;
 
     private HashMap<geography.GeographicPoint, Marker> markerMap;
     private ArrayListADT<geography.GeographicPoint> markerPositions;
@@ -57,6 +52,7 @@ public class MarkerManager {
     public void setVisButton(Button vButton) {
     	this.vButton = vButton;
     }
+    
 
     public void setSelect(boolean value) {
     	selectMode = value;

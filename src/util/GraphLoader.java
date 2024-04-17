@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -14,10 +13,11 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import HashSetADT.HashSetADT;
-import basicgraph.Graph;
 import geography.GeographicPoint;
 import geography.RoadSegment;
+import graph.Graph;
+import hashMap.HashMap;
+import hashSet.HashSetADT;
 import roadgraph.MapGraph;
 
 
@@ -44,7 +44,6 @@ public class GraphLoader implements GraphLoaderInterface
 		HashSetADT<GeographicPoint> nodes = new HashSetADT<GeographicPoint>();
         HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap = 
         		buildPointMapOneWay(roadDataFile);
-		System.out.println(pointMap.get(pointMap));
         // Print the intersections to the file
 		List<GeographicPoint> intersections = findIntersections(pointMap);
 		for (GeographicPoint pt : intersections) {
@@ -163,7 +162,7 @@ public class GraphLoader implements GraphLoaderInterface
 	 * @param theGraph The graph to load the map into.  The graph is
 	 *   assumed to be directed.
 	 */
-	public void loadRoadMap(String filename, basicgraph.Graph theGraph)
+	public void loadRoadMap(String filename, graph.Graph theGraph)
 	{
 		HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap = 
         		buildPointMapOneWay(filename);
@@ -268,7 +267,7 @@ public class GraphLoader implements GraphLoaderInterface
 	 * @param filename The file containing the graph
 	 * @param theGraph The graph to be loaded
 	 */
-	public void loadGraph(String filename, basicgraph.Graph theGraph)
+	public void loadGraph(String filename, graph.Graph theGraph)
 	{
 		BufferedReader reader = null;
         try {
@@ -383,7 +382,7 @@ public class GraphLoader implements GraphLoaderInterface
 
 	private static GeographicPoint
 	findEndOfEdge(HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap,
-		RoadLineInfo info, basicgraph.Graph graph, 
+		RoadLineInfo info, graph.Graph graph, 
 		HashMap<GeographicPoint, Integer> reverseMap) 
 	{
 		
@@ -505,7 +504,7 @@ public class GraphLoader implements GraphLoaderInterface
         GeographicPoint point = new GeographicPoint(lat, lon);
 
         // Iterate over the HashMap entries
-        for (Entry<GeographicPoint, List<LinkedList<RoadLineInfo>>> entry : pointMap.entrySet()) {
+        for (hashMap.HashMap.Entry<GeographicPoint, List<LinkedList<RoadLineInfo>>> entry : pointMap.entrySet()) {
             GeographicPoint key = entry.getKey();
             List<LinkedList<RoadLineInfo>> roadLines = entry.getValue();
 

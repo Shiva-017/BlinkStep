@@ -35,10 +35,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebView;
 import netscape.javascript.JSObject;
 
-/**
- *
- * @author Rob Terpilowski
- */
 public class GoogleMapView extends AnchorPane {
 
     protected WebView webview;
@@ -57,48 +53,7 @@ public class GoogleMapView extends AnchorPane {
         this(null, debug);
     }
 
-    /**
-     * Allows for the creation of the map using external resources from another
-     * jar for the html page and markers. The map html page must be sourced from
-     * the jar containing any marker images for those to function.
-     * <p>
-     * The html page is, at it's simplest:
-     * {@code
-	 * <!DOCTYPE html>
-     * <html>
-     *   <head>
-     *     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-     *     <meta charset="utf-8">
-     *     <title>My Map</title>
-     *     <style>
-     *     html, body, #map-canvas {
-     *       height: 100%;
-     *       margin: 0px;
-     *       padding: 0px
-     *     }
-     * </style>
-     * <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-     * </head>
-     * <body>
-     * <div id="map-canvas"></div>
-     * </body>
-     * </html>
-     * }
-     * <p>
-     * If you store this file in your project jar, under
-     * my.gmapsfx.project.resources as mymap.html then you should call using
-     * "/my/gmapsfx/project/resources/mymap.html" for the mapResourcePath.
-     * <p>
-     * Your marker images should be stored in the same folder as, or below the
-     * map file. You then reference them using relative notation. If you put
-     * them in a subpackage "markers" you would create your MarkerOptions object
-     * as follows:
-     * {@code
-	 * myMarkerOptions.position(myLatLong)
-     *     .title("My Marker")
-     *     .icon("markers/mymarker.png")
-     *     .visible(true);
-     * }
+    /*
      *
      * @param mapResourcePath
      */
@@ -119,13 +74,12 @@ public class GoogleMapView extends AnchorPane {
             if (debug) {
                 htmlFile = "/html/maps-debug.html";
             } else {
-                htmlFile = "/html/index1.html";
+                htmlFile = "/html/index.html";
             }
         } else {
             htmlFile = mapResourcePath;
         }
         webview = new WebView();
-        //System.out.println("webview : " + webview);
         webengine = new JavaFxWebEngine(webview.getEngine());
         JavascriptRuntime.setDefaultWebEngine(webengine);
 
@@ -151,18 +105,14 @@ public class GoogleMapView extends AnchorPane {
                         }
                     }
                 });
-        //System.out.println("web engine before load : " + webengine);
         webengine.load(getClass().getResource(htmlFile).toExternalForm());
-        //System.out.println("AFTER LOAD");
 
     }
 
     private void mapResized() {
         if (initialized) {
-            //map.triggerResized();
-//            System.out.println("GoogleMapView.mapResized: triggering resize event");
+ 
             webengine.executeScript("google.maps.event.trigger(" + map.getVariableName() + ", 'resize')");
-//            System.out.println("GoogleMapView.mapResized: triggering resize event done");
         }
     }
 

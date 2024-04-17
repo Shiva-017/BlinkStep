@@ -1,6 +1,5 @@
 package application.services;
 
-import ArrayListADT.ArrayListADT;
 import java.util.regex.Pattern;
 
 import application.DataSet;
@@ -8,6 +7,7 @@ import application.GoogleMapView;
 import application.MapApp;
 import application.MarkerManager;
 import application.SelectManager;
+import arrayList.ArrayListADT;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.LatLongBounds;
@@ -19,7 +19,6 @@ import mapmaker.MapMaker;
 
 // class for map and general application services (file IO, etc.)
 public class GeneralService {
-//	private static boolean singleton = false;
 	private int currentState;
 	private SelectManager selectManager;
 	private GoogleMap map;
@@ -34,7 +33,6 @@ public class GeneralService {
     DataSet dataSet;
 
     public GeneralService(GoogleMapView mapComponent, SelectManager selectManager, MarkerManager markerManager) {
-        // get map from GoogleMapView
     	this.map = mapComponent.getMap();
     	this.selectManager = selectManager;
         this.markerManager = markerManager;
@@ -67,7 +65,6 @@ public class GeneralService {
     	sw = bounds.getSouthWest();
     	ne = bounds.getNorthEast();
 
-    	// [S, W, N, E]
     	return new float[] {(float) sw.getLatitude(), (float) sw.getLongitude(),
     			            (float) ne.getLatitude(), (float) ne.getLongitude()};
     }
@@ -77,7 +74,6 @@ public class GeneralService {
     }
 
     public void displayIntersections(DataSet dataset) {
-        // remove old data set markers
     	if(markerManager == null){
     	  System.out.println("failure!");
     	}
@@ -86,7 +82,6 @@ public class GeneralService {
             markerManager.getDataSet().setDisplayed(false);
         }
 
-        // display new data set
     	selectManager.setAndDisplayData(dataset);
         dataset.setDisplayed(true);
 

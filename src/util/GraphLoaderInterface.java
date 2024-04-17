@@ -1,12 +1,12 @@
 package util;
 
-import java.util.HashMap;
 import java.util.Set;
 
-import HashSetADT.HashSetADT;
-import basicgraph.Graph;
 import geography.GeographicPoint;
 import geography.RoadSegment;
+import graph.Graph;
+import hashMap.HashMap;
+import hashSet.HashSetADT;
 import roadgraph.MapGraph;
 
 /**

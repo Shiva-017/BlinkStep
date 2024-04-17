@@ -1,12 +1,11 @@
 package application.services;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.function.Consumer;
 
-import HashSetADT.HashSetADT;
 import application.DataSet;
+import hashSet.HashSetADT;
 import application.GoogleMapView;
 import application.MapApp;
 import application.MarkerManager;
@@ -14,19 +13,16 @@ import application.RouteVisualization;
 import application.controllers.RouteController;
 
 import java.util.Iterator;
-import application.GoogleMapView;
-import geography.GeographicPoint;
-import geography.RoadSegment;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.LatLongBounds;
 import gmapsfx.javascript.object.MVCArray;
 import gmapsfx.shapes.Polyline;
+import hashSet.HashSetADT;
 
 public class RouteService {
 	private GoogleMap map;
 
-    // static variable
     private MarkerManager markerManager;
     private Polyline routeLine;
     private RouteVisualization rv;
@@ -36,12 +32,7 @@ public class RouteService {
         this.markerManager = manager;
 
 	}
-    // COULD SEPARATE INTO ROUTE SERVICES IF CONTROLLER
-	// GETS BIG
-	// initialize??
-
-	// add route polyline to map
-	//DISPLAY ROUTE METHODS
+    
 	/**
 	 * Displays route on Google Map
 	 * @return returns false if route fails to display
@@ -61,12 +52,6 @@ public class RouteService {
 		routeLine.setPath(path);
 
 		map.addMapShape(routeLine);
-
-		//System.out.println(bounds.getNorthEast());
-		//EXCEPTION getBounds() messed up??
-        //System.out.println(routeLine.getBounds());
-
-
 		markerManager.hideIntermediateMarkers();
 		map.fitBounds(bounds);
     	markerManager.disableVisButton(false);
@@ -99,7 +84,7 @@ public class RouteService {
         	}
 
         	if(toggle == RouteController.DIJ || toggle == RouteController.A_STAR ||
-        			toggle == RouteController.BFS) {
+        			toggle == RouteController.BFS || toggle == RouteController.BDS) {
         		markerManager.initVisualization();
             	Consumer<geography.GeographicPoint> nodeAccepter = markerManager.getVisualization()::acceptPoint;
             	List<geography.GeographicPoint> path = null;
@@ -111,19 +96,15 @@ public class RouteService {
             	}
             	else if (toggle == RouteController.A_STAR) {
             		path = markerManager.getDataSet().getGraph().aStarSearch(start, end, nodeAccepter);
+            	} else if (toggle == RouteController.BDS) {
+            		path = markerManager.getDataSet().getGraph().bidirectionalSearch(start, end, nodeAccepter);
             	}
 
             	if(path == null) {
-                    // System.out.println("In displayRoute : PATH NOT FOUND");
                     MapApp.showInfoAlert("Routing Error : ", "No path found");
                 	return false;
                 }
-                // TODO -- debug road segments
             	List<LatLong> mapPath = constructMapPath(path);
-                //List<LatLong> mapPath = new ArrayList<LatLong>();
-                //for(geography.GeographicPoint point : path) {
-                //    mapPath.add(new LatLong(point.getX(), point.getY()));
-                //}
 
 
                 markerManager.setSelectMode(false);
@@ -139,7 +120,7 @@ public class RouteService {
 
 
     /**
-     * Construct path including road regments
+     * Construct path including road segments
      * @param path - path with only intersections
      * @return list of LatLongs corresponding the path of route
      */
@@ -160,15 +141,11 @@ public class RouteService {
         		HashSetADT<geography.RoadSegment> segments = markerManager.getDataSet().getRoads().get(curr);
         		Iterator<geography.RoadSegment> it = segments.iterator();
 
-        		// get segments which are
             	geography.RoadSegment currSegment;
                 while(it.hasNext()) {
-                    //System.out.println("new segment");
                 	currSegment = it.next();
                 	if(currSegment.getOtherPoint(curr).equals(next)) {
-                        //System.out.println("1st check passed : other point correct");
                 		if(currSegment.getLength() < minLength) {
-                            //System.out.println("2nd check passed : length less");
                 			chosenSegment = currSegment;
                 		}
                 	}
@@ -183,12 +160,9 @@ public class RouteService {
                 else {
                 	System.err.println("ERROR in constructMapPath : chosenSegment was null");
                 }
-        		// find
 
         	}
         }
-
-        // System.out.println("NOW there are " + retVal.size() + " points");
     	return retVal;
     }
 
@@ -198,14 +172,6 @@ public class RouteService {
     		map.removeMapShape(routeLine);
         }
 	}
-
-//    private void setMarkerManager(MarkerManager manager) {
-//    	this.markerManager = manager;
-//    }
-
-
-
-
 }
 
 

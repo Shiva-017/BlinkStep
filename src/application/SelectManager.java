@@ -10,22 +10,15 @@ public class SelectManager {
     private CLabel<GeographicPoint> pointLabel;
     private CLabel<GeographicPoint> startLabel;
     private CLabel<GeographicPoint> destinationLabel;
-    private Marker startMarker;
-    private Marker destinationMarker;
-    private Marker selectedMarker;
     private MarkerManager markerManager;
     private DataSet dataSet;
     
 
 
     public SelectManager() {
-        startMarker = null;
-        destinationMarker = null;
-        selectedMarker = null;
         pointLabel = null;
         startLabel = null;
         destinationLabel = null;
-        dataSet = null;
     }
 
 
@@ -33,7 +26,6 @@ public class SelectManager {
         markerManager.setSelectMode(true);
     }
     public void clearSelected() {
-    	selectedMarker = null;
     	pointLabel.setItem(null);
     }
 
@@ -51,10 +43,9 @@ public class SelectManager {
     public void setPoint(GeographicPoint point, Marker marker) {
          String street = GraphLoader.findStreetName(point.x, point.y);
     	pointLabel.setItemWithName(point, street);
-        selectedMarker = marker;
+//        selectedMarker = marker;
     }
     public void setDataSet(DataSet dataSet) {
-    	this.dataSet = dataSet;
     	if(markerManager != null) {
     		markerManager.setDataSet(dataSet);
     	}
@@ -84,7 +75,4 @@ public class SelectManager {
     		markerManager.setDestination(point);
 		}
 	}
-
-
-
 }

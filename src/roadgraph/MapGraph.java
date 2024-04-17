@@ -7,17 +7,19 @@ package roadgraph;
 
 
 import java.util.List;
-import java.util.Map;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedList;
-import queueADT.Queue;
-import priorityQueueADT.PriorityQueue;
+
+import queue.Queue;
+
 import java.util.function.Consumer;
 
 import geography.GeographicPoint;
+import hashMap.HashMap;
+import hashMap.HashMapADT;
+import priorityQueue.PriorityQueue;
 import util.GraphLoader;
 
 /**
@@ -26,7 +28,7 @@ import util.GraphLoader;
  *
  */
 public class MapGraph {
-	private Map<GeographicPoint, MapNode> intersections;
+	private HashMapADT<GeographicPoint, MapNode> intersections;
 	private int numVertices;
 	private int numEdges;
 	
@@ -158,7 +160,7 @@ public class MapGraph {
 	{
 		Set<MapNode> visited = new HashSet<MapNode>();
 		Queue<MapNode> queue = new Queue<>();
-		Map<MapNode, MapNode> parent = new HashMap<MapNode, MapNode>();
+		HashMapADT<MapNode, MapNode> parent = new HashMap<MapNode, MapNode>();
 		
 		boolean pathFound = false;
 		
@@ -202,7 +204,7 @@ public class MapGraph {
 	 * 
 	 */
 	private List<GeographicPoint> getPath(MapNode start, MapNode goal, 
-			Map<MapNode, MapNode> parent, boolean pathFound) {
+			HashMapADT<MapNode, MapNode> parent, boolean pathFound) {
 		
 		if (pathFound == false) {
 			System.out.println("There is no path found from " + start + " to " + goal + ".");
@@ -384,8 +386,134 @@ public class MapGraph {
 		
 	}
 
-	
-	
+	/**
+	 * Performs a bidirectional search algorithm to find the shortest path from the start point to the end point.
+	 * 
+	 * @param start The starting location
+	 * @param end The goal location
+	 * @return A list of GeographicPoint objects representing the shortest path from start to end (including both start and end points),
+	 *         or an empty list if no path is found.
+	 */
+	public List<GeographicPoint> bidirectionalSearch(GeographicPoint start, GeographicPoint end) {
+	    return bidirectionalSearch(start, end, (x) -> {});
+	}
+
+	 
+	/**
+	 * Performs a bidirectional search algorithm to find the shortest path from the start point to the end point.
+	 * 
+	 * @param start The starting location
+	 * @param end The goal location
+	 * @param nodeSearched A hook for visualization. See assignment instructions for how to use it.
+	 * @return A list of GeographicPoint objects representing the shortest path from start to end (including both start and end points),
+	 *         or an empty list if no path is found.
+	 */
+	public List<GeographicPoint> bidirectionalSearch(GeographicPoint start, GeographicPoint end, Consumer<GeographicPoint> nodeSearched) {
+	    // Data structures for the forward and backward searches
+	    HashSet<MapNode> visitedForward = new HashSet<>();
+	    HashSet<MapNode> visitedBackward = new HashSet<>();
+	    PriorityQueue<MapNode> queueForward = new PriorityQueue<>();
+	    PriorityQueue<MapNode> queueBackward = new PriorityQueue<>();
+	    HashMap<MapNode, MapNode> parentForward = new HashMap<>();
+	    HashMap<MapNode, MapNode> parentBackward = new HashMap<>();
+	    
+	    // Initialize start and end nodes for forward and backward searches
+	    MapNode startNode = intersections.get(start);
+	    MapNode endNode = intersections.get(end);
+	    
+	    // Set initial distances for both directions
+	    for (GeographicPoint location : intersections.keySet()) {
+	        intersections.get(location).setDistance(Double.MAX_VALUE);
+	    }
+	    startNode.setDistance(0.0);
+	    endNode.setDistance(0.0);
+	    
+	    // Add start and end nodes to their respective queues
+	    queueForward.add(startNode);
+	    queueBackward.add(endNode);
+	    
+	    // Initialize variables to track common intersection and minimum distance
+	    MapNode intersectionNode = null;
+	    double minDistance = Double.MAX_VALUE;
+	    
+	    // Loop until one of the queues becomes empty
+	    while (!queueForward.isEmpty() && !queueBackward.isEmpty()) {
+	        // Perform forward search
+	        MapNode currentForward = queueForward.remove();
+	        visitedForward.add(currentForward);
+	        nodeSearched.accept(currentForward.getLocation());
+	        
+	        // Check if current node is visited by backward search
+	        if (visitedBackward.contains(currentForward)) {
+	            // Check if combined distance is minimum
+	            if (currentForward.getDistance() + parentBackward.get(currentForward).getDistance() < minDistance) {
+	                minDistance = currentForward.getDistance() + parentBackward.get(currentForward).getDistance();
+	                intersectionNode = currentForward;
+	            }
+	        }
+	        
+	        // Expand neighbors of current node in forward search
+	        for (MapEdge road : currentForward.getRoadList()) {
+	            MapNode neighbor = intersections.get(road.getEndPoint());
+	            if (!visitedForward.contains(neighbor)) {
+	                double minDist = currentForward.getDistance() + road.getLength();
+	                if (minDist < neighbor.getDistance()) {
+	                    neighbor.setDistance(minDist);
+	                    parentForward.put(neighbor, currentForward);
+	                    queueForward.add(neighbor);
+	                }
+	            }
+	        }
+	        
+	        // Perform backward search
+	        MapNode currentBackward = queueBackward.remove();
+	        visitedBackward.add(currentBackward);
+	        nodeSearched.accept(currentBackward.getLocation());
+	        
+	        // Check if current node is visited by forward search
+	        if (visitedForward.contains(currentBackward)) {
+	            // Check if combined distance is minimum
+	            if (currentBackward.getDistance() + parentForward.get(currentBackward).getDistance() < minDistance) {
+	                minDistance = currentBackward.getDistance() + parentForward.get(currentBackward).getDistance();
+	                intersectionNode = currentBackward;
+	            }
+	        }
+	        
+	        // Expand neighbors of current node in backward search
+	        for (MapEdge road : currentBackward.getRoadList()) {
+	            MapNode neighbor = intersections.get(road.getEndPoint());
+	            if (!visitedBackward.contains(neighbor)) {
+	                double minDist = currentBackward.getDistance() + road.getLength();
+	                if (minDist < neighbor.getDistance()) {
+	                    neighbor.setDistance(minDist);
+	                    parentBackward.put(neighbor, currentBackward);
+	                    queueBackward.add(neighbor);
+	                }
+	            }
+	        }
+	    }
+	    
+	    if (intersectionNode != null) {
+	        List<GeographicPoint> path = new LinkedList<>();
+	        MapNode temp = intersectionNode;
+	        while (temp != null) {
+	            path.add(temp.getLocation());
+	            temp = parentForward.get(temp);
+	        }
+	        Collections.reverse(path);
+	        temp = parentBackward.get(intersectionNode);
+	        while (temp != null) {
+	            path.add(temp.getLocation());
+	            temp = parentBackward.get(temp);
+	        }
+	        return path;
+	    } else {
+	        System.out.println("No path found.");
+	        return new LinkedList<>();
+	    }
+	}
+
+
 	public static void main(String[] args)
 	{
 		System.out.print("Making a new map...");
