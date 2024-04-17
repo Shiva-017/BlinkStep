@@ -1,13 +1,9 @@
 package hashMap;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
 
-import geography.GeographicPoint;
+import hashSet.HashSet;
 
 public class HashMap<K,V> implements HashMapADT<K,V> {
 
@@ -43,15 +39,15 @@ public class HashMap<K,V> implements HashMapADT<K,V> {
             return key + "=" + value;
         }
 
-		public K getKey() {
-			// TODO Auto-generated method stub
-			return this.key;
+		public V getValue() {
+			return value;
 		}
 
-		public V getValue() {
-			// TODO Auto-generated method stub
-			return this.value;
+		public K getKey() {
+			return key;
 		}
+        
+        
     }
 
     private int hash(K key) {
@@ -119,8 +115,8 @@ public class HashMap<K,V> implements HashMapADT<K,V> {
         return false;
     }
 
-    public Set<Entry<K, V>> entrySet() {
-        Set<Entry<K, V>> entrySet = new HashSet<>();
+    public HashSet<Entry<K, V>> entrySet() {
+    	HashSet<Entry<K, V>> entrySet = new HashSet<>();
         for (LinkedList<Entry<K, V>> bucket : table) {
             if (bucket != null) {
                 entrySet.addAll(bucket);
@@ -129,8 +125,8 @@ public class HashMap<K,V> implements HashMapADT<K,V> {
         return entrySet;
     }
 
-    public Set<K> keySet() {
-        Set<K> keySet = new HashSet<>();
+    public HashSet<K> keySet() {
+    	HashSet<K> keySet = new HashSet<>();
         for (LinkedList<Entry<K, V>> bucket : table) {
             if (bucket != null) {
                 for (Entry<K, V> entry : bucket) {
@@ -139,6 +135,18 @@ public class HashMap<K,V> implements HashMapADT<K,V> {
             }
         }
         return keySet;
+    }
+    
+    public Collection<K> keySetCollect() {
+    	HashSet<K> keySet = new HashSet<>();
+        for (LinkedList<Entry<K, V>> bucket : table) {
+            if (bucket != null) {
+                for (Entry<K, V> entry : bucket) {
+                    keySet.add(entry.key);
+                }
+            }
+        }
+        return  (Collection<K>) keySet;
     }
 
     private void resize() {

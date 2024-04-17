@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/arrayList/ArrayListADT.java
-package arrayList;
-========
 package list;
->>>>>>>> 44ae520ab66793224ac93d108bd572cef25ee7a9:src/list/ArrayList.java
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

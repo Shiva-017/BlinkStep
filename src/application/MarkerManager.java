@@ -4,8 +4,6 @@
 package application;
 
 import java.util.Iterator;
-
-import arrayList.ArrayListADT;
 import gmapsfx.javascript.event.UIEventType;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
