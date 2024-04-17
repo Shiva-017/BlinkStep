@@ -1,4 +1,4 @@
-package queueADT;
+package queue;
 
 // Implementation of QueueADT using a linked list
 public class Queue<T> implements QueueADT<T> {

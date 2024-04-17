@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.json.*;
 
-import hashMapADT.HashMap;
+import hashMap.HashMap;
 
 public class MapMaker {
     float[] bounds;

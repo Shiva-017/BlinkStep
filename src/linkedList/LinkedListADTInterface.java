@@ -1,4 +1,4 @@
-package LinkedListADT;
+package linkedList;
 
 public interface LinkedListADTInterface<T> {
 	 void add(T element);

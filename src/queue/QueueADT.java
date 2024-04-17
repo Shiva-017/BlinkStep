@@ -1,4 +1,4 @@
-package queueADT;
+package queue;
 
 // Interface for a generic queue ADT
 public interface QueueADT<T> {

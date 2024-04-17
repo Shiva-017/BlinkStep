@@ -1,4 +1,4 @@
-package ArrayListADT;
+package arrayList;
 import java.util.ArrayList;
 
 public interface ArrayListADTInterface<T> {

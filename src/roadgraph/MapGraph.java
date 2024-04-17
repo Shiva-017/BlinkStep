@@ -11,13 +11,15 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedList;
-import queueADT.Queue;
-import priorityQueueADT.PriorityQueue;
+
+import queue.Queue;
+
 import java.util.function.Consumer;
 
 import geography.GeographicPoint;
-import hashMapADT.HashMap;
-import hashMapADT.HashMapADT;
+import hashMap.HashMap;
+import hashMap.HashMapADT;
+import priorityQueue.PriorityQueue;
 import util.GraphLoader;
 
 /**

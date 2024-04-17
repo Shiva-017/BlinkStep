@@ -1,4 +1,4 @@
-package hashMapADT;
+package hashMap;
 
 import java.util.Collection;
 import java.util.Set;
