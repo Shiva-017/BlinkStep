@@ -8,8 +8,6 @@ package roadgraph;
 
 import java.util.List;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.LinkedList;
 
 import queue.Queue;
@@ -19,6 +17,8 @@ import java.util.function.Consumer;
 import geography.GeographicPoint;
 import hashMap.HashMap;
 import hashMap.HashMapADT;
+import hashSet.HashSet;
+import hashSet.HashSetADT;
 import priorityQueue.PriorityQueue;
 import util.GraphLoader;
 
@@ -28,7 +28,7 @@ import util.GraphLoader;
  *
  */
 public class MapGraph {
-	private HashMapADT<GeographicPoint, MapNode> intersections;
+	private HashMap<GeographicPoint, MapNode> intersections;
 	private int numVertices;
 	private int numEdges;
 	
@@ -55,7 +55,7 @@ public class MapGraph {
 	 * Return the intersections, which are the vertices in this graph.
 	 * @return The vertices in this graph as GeographicPoints
 	 */
-	public Set<GeographicPoint> getVertices()
+	public HashSet<GeographicPoint> getVertices()
 	{
 		
 		return intersections.keySet();
@@ -158,7 +158,7 @@ public class MapGraph {
 	public List<GeographicPoint> bfs(GeographicPoint start, 
 			 					     GeographicPoint goal, Consumer<GeographicPoint> nodeSearched)
 	{
-		Set<MapNode> visited = new HashSet<MapNode>();
+		HashSet<MapNode> visited = new HashSet<MapNode>();
 		Queue<MapNode> queue = new Queue<>();
 		HashMapADT<MapNode, MapNode> parent = new HashMap<MapNode, MapNode>();
 		

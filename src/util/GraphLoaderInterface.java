@@ -6,7 +6,7 @@ import geography.GeographicPoint;
 import geography.RoadSegment;
 import graph.Graph;
 import hashMap.HashMap;
-import hashSet.HashSetADT;
+import hashSet.HashSet;
 import roadgraph.MapGraph;
 
 /**
@@ -41,7 +41,7 @@ public interface GraphLoaderInterface {
      * @param segments The collection of RoadSegments defining the shape of roads.
      * @param intersectionsToLoad The set of intersections to load.
      */
-    public void loadRoadMap(String filename, MapGraph map, HashMap<GeographicPoint, HashSetADT<RoadSegment>> segments, Set<GeographicPoint> intersectionsToLoad);
+    public void loadRoadMap(String filename, MapGraph map, HashMap<GeographicPoint, HashSet<RoadSegment>> segments, HashSet<GeographicPoint> intersectionsToLoad);
 
     /** Loads a road map into a Graph.
      * This method reads road data from a file and constructs a Graph 
