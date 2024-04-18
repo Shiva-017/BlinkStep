@@ -98,6 +98,7 @@ public class RouteController {
 
         hideButton.setOnAction(e -> {
         	routeService.hideRoute();
+        	exportButton.setDisable(true);
         });
 
         resetButton.setOnAction( e -> {

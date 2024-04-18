@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import application.CLabel;
 import application.DataSet;
 import hashSet.HashSet;
 import application.GoogleMapView;
@@ -19,6 +20,7 @@ import gmapsfx.javascript.object.LatLongBounds;
 import gmapsfx.javascript.object.MVCArray;
 import gmapsfx.shapes.Polyline;
 import hashSet.HashSet;
+import roadgraph.MapGraph;
 
 public class RouteService {
 	private GoogleMap map;
@@ -98,6 +100,10 @@ public class RouteService {
             		path = markerManager.getDataSet().getGraph().aStarSearch(start, end, nodeAccepter);
             	} else if (toggle == RouteController.BDS) {
             		path = markerManager.getDataSet().getGraph().bidirectionalSearch(start, end, nodeAccepter);
+            		CLabel<geography.GeographicPoint> label = roadgraph.MapGraph.getIntersectionLabel();
+            		markerManager.setIntersection(label);
+                  		
+
             	}
 
             	if(path == null) {

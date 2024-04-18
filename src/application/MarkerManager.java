@@ -5,6 +5,7 @@ package application;
 
 import java.util.Iterator;
 
+import geography.GeographicPoint;
 import gmapsfx.javascript.event.UIEventType;
 import gmapsfx.javascript.object.GoogleMap;
 import gmapsfx.javascript.object.LatLong;
@@ -26,6 +27,7 @@ public class MarkerManager {
     protected static String SELECTED_URL = "https://img.icons8.com/external-sbts2018-mixed-sbts2018/28/external-03-gps-ecommerce-basic-1-sbts2018-mixed-sbts2018-2.png";
     protected static String markerURL = "http://maps.google.com/mapfiles/kml/paddle/blu-diamond-lv.png";
 	protected static String visURL = "http://maps.google.com/mapfiles/kml/paddle/red-diamond-lv.png";
+	protected static String intersectionURL = "https://img.icons8.com/nolan/64/handshake.png";
     private Marker startMarker;
     private Marker destinationMarker;
     private Marker selectedMarker;
@@ -93,6 +95,7 @@ public class MarkerManager {
         startMarker = markerMap.get(point);
         changeIcon(startMarker, startURL);
     }
+    
     public void setDestination(geography.GeographicPoint point) {
     	if(destinationMarker != null) {
     		destinationMarker.setIcon(markerURL);
@@ -181,6 +184,7 @@ public class MarkerManager {
     	else {
     	}
     }
+    
     public void displayDataSet() {
         markerPositions = new ArrayList<geography.GeographicPoint>();
         dataSet.initializeGraph();
@@ -228,4 +232,17 @@ public class MarkerManager {
 
 
     public DataSet getDataSet() { return this.dataSet; }
+    
+	public  void setIntersection(CLabel<GeographicPoint> label) {
+        LatLong ll = new LatLong(label.getItem().getX(), label.getItem().getY());
+		MarkerOptions markerOptions = createDefaultOptions(ll);
+		Marker marker = new Marker(markerOptions);
+        registerEvents(marker, label.getItem());
+    	map.addMarker(marker);
+    	changeIcon(marker, intersectionURL);
+		markerMap.put(label.getItem(),marker);
+    	markerPositions.add(label.getItem());
+        
+
+	}
 }

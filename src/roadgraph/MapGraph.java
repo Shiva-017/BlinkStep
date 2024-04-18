@@ -14,6 +14,7 @@ import queue.Queue;
 
 import java.util.function.Consumer;
 
+import application.CLabel;
 import geography.GeographicPoint;
 import hashMap.HashMap;
 import hashMap.HashMapADT;
@@ -31,6 +32,7 @@ public class MapGraph {
 	private HashMap<GeographicPoint, MapNode> intersections;
 	private int numVertices;
 	private int numEdges;
+    private static CLabel<geography.GeographicPoint> intersectionLabel;
 	
 	/** 
 	 * Create a new empty MapGraph 
@@ -40,6 +42,7 @@ public class MapGraph {
 		intersections = new HashMap<GeographicPoint, MapNode>();
 		numVertices = 0;
 		numEdges = 0;
+        intersectionLabel  = new CLabel<>();; 
 	}
 	
 	/**
@@ -134,6 +137,11 @@ public class MapGraph {
 			System.out.println("\n\n");			
 		}
 	}
+	
+	public static CLabel<geography.GeographicPoint> getIntersectionLabel() {
+        return intersectionLabel;
+    }
+    
 
 	/** Find the path from start to goal using breadth first search
 	 * 
@@ -506,6 +514,8 @@ public class MapGraph {
 	            path.add(temp.getLocation());
 	            temp = parentBackward.get(temp);
 	        }
+	     // Set intersection label
+	        intersectionLabel.setItem(intersectionNode.getLocation());
 	        return path;
 	    } else {
 	        System.out.println("No path found.");
