@@ -22,7 +22,8 @@ public class DataFetcher {
 	    public JsonObject getData() {
 	        HttpURLConnection conn = null;
 	        try {
-	            URL url = new URL("http://overpass-api.de/api/interpreter");
+	            @SuppressWarnings("deprecation")
+				URL url = new URL("http://overpass-api.de/api/interpreter");
 	            conn = (HttpURLConnection)url.openConnection();
 	            conn.setDoOutput(true);
 	            conn.setRequestMethod("POST");

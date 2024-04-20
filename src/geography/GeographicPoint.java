@@ -4,7 +4,6 @@ import java.awt.geom.Point2D.Double;
 
 @SuppressWarnings("serial")
 public class GeographicPoint extends Double {
-	private String locationName;
 	
 	public GeographicPoint(double latitude, double longitude)
 	{
@@ -26,7 +25,7 @@ public class GeographicPoint extends Double {
     
     private double getDist(double lat1, double lon1, double lat2, double lon2)
     {
-    	int R = 6373; // radius of the earth in kilometres
+    	int R = 6373; 
     	double lat1rad = Math.toRadians(lat1);
     	double lat2rad = Math.toRadians(lat2);
     	double deltaLat = Math.toRadians(lat2-lat1);
@@ -45,6 +44,4 @@ public class GeographicPoint extends Double {
     {
     	return "Lat: " + getX() + ", Lon: " + getY();
     }
-	
-	
 }

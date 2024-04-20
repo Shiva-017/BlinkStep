@@ -48,7 +48,7 @@ public class MapEdge {
 	}
 	
 	/** Getter for end point 
-	 * @return endf
+	 * @return end 
 	 * */
 	public GeographicPoint getEndPoint() {
 		return this.end;

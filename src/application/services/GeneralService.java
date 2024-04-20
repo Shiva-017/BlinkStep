@@ -15,9 +15,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import list.ArrayList;
-import mapmaker.MapMaker;
+import application.mapmaker.MapMaker;
 
-// class for map and general application services (file IO, etc.)
+
 public class GeneralService {
 	private int currentState;
 	private SelectManager selectManager;
@@ -43,7 +43,7 @@ public class GeneralService {
 
 
 	// writes geographic data flat file
-    // parameters arr contains the coordinates of the bounds for the map region
+    // parameters array contains the coordinates of the bounds for the map region
     public boolean writeDataToFile(String filename, float[] arr) {
      	MapMaker mm = new MapMaker(arr);
 

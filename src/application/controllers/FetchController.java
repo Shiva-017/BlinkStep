@@ -3,7 +3,6 @@ package application.controllers;
 import application.DataSet;
 import application.services.GeneralService;
 import application.services.RouteService;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;

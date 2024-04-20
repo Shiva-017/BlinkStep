@@ -108,7 +108,5 @@ public class RoadSegment {
 		System.out.println("ERROR!! : in RoadSegment::getOtherPoint Neither point matched");
 		return null;
 	}
-
-
 	
 }

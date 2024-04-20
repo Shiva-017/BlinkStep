@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import application.CLabel;
-import application.DataSet;
 import hashSet.HashSet;
 import application.GoogleMapView;
 import application.MapApp;
@@ -19,8 +18,7 @@ import gmapsfx.javascript.object.LatLong;
 import gmapsfx.javascript.object.LatLongBounds;
 import gmapsfx.javascript.object.MVCArray;
 import gmapsfx.shapes.Polyline;
-import hashSet.HashSet;
-import roadgraph.MapGraph;
+
 
 public class RouteService {
 	private GoogleMap map;

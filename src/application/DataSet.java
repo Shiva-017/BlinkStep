@@ -7,8 +7,7 @@ import hashSet.HashSet;
 import util.GraphLoader;
 
 /**
- * Class to wrap the graph, current .map file map, and 
- * other pertinent information about the map data sets
+ * Class for graph, i.e current .map file map
  */
 public class DataSet {
 	String filePath;
@@ -32,10 +31,6 @@ public class DataSet {
     public roadgraph.MapGraph getGraph(){ return graph; }
     
     /** Return the intersections in this graph.
-     * In order to keep it consistent, if getVertices in the graph returns something 
-     * other than null (i.e. it's been implemented) we get the vertices from 
-     * the graph itself.  But if the graph hasn't been implemented, we return 
-     * the set of intersections we separately maintain specifically for this purpose.
      * @return The set of road intersections (vertices in the graph)
      */
     public HashSet<GeographicPoint> getIntersections() {

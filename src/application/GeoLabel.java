@@ -4,7 +4,6 @@
 
 package application;
 
-import javafx.beans.property.ObjectProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 

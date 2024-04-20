@@ -24,7 +24,6 @@ import javafx.stage.Stage;
 import list.ListADT;
 
 public class RouteController {
-	// Strings for slider labels
 	public static final int BDS = 4;
 	public static final int BFS = 3;
     public static final int A_STAR = 2;
@@ -47,7 +46,6 @@ public class RouteController {
     private ToggleGroup group;
     private CLabel<geography.GeographicPoint> startLabel;
     private CLabel<geography.GeographicPoint> endLabel;
-    private CLabel<geography.GeographicPoint> pointLabel;
     private SelectManager selectManager;
     private MarkerManager markerManager;
 
@@ -70,7 +68,6 @@ public class RouteController {
 
 		this.startLabel = startLabel;
 		this.endLabel = endLabel;
-        this.pointLabel = pointLabel;
         this.selectManager = manager;
         this.markerManager = markerManager;
 
@@ -178,8 +175,4 @@ public class RouteController {
             }
     	});
     }
-
-
-
-
 }

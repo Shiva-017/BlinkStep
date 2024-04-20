@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,10 +28,7 @@ public class GraphLoader implements GraphLoaderInterface
 	 * 
 	 * where each line is a segment of a road
 	 * These road segments are assumed to be ONE WAY.
-	 * 
-	 * This method will collapse the points so that only intersections 
-	 * are represented as nodes in the graph.
-	 * 
+	 *  
 	 * @param roadDataFile The file containing the road data, in the format 
 	 *   described.
 	 * @param intersectionsFile The output file containing the intersections.
@@ -44,7 +39,6 @@ public class GraphLoader implements GraphLoaderInterface
 		HashSet<GeographicPoint> nodes = new HashSet<GeographicPoint>();
         HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap = 
         		buildPointMapOneWay(roadDataFile);
-        // Print the intersections to the file
 		List<GeographicPoint> intersections = findIntersections(pointMap);
 		for (GeographicPoint pt : intersections) {
 			nodes.add(pt);
@@ -87,9 +81,6 @@ public class GraphLoader implements GraphLoaderInterface
 	 * where each line is a segment of a road
 	 * These road segments are assumed to be ONE WAY.
 	 * 
-	 * This method will collapse the points so that only intersections 
-	 * are represented as nodes in the graph.
-	 * 
 	 * @param filename The file containing the road data, in the format 
 	 *   described.
 	 * @param map The graph to load the map into.  The graph is
@@ -112,9 +103,6 @@ public class GraphLoader implements GraphLoaderInterface
 	 * 
 	 * where each line is a segment of a road
 	 * These road segments are assumed to be ONE WAY.
-	 * 
-	 * This method will collapse the points so that only intersections 
-	 * are represented as nodes in the graph.
 	 * 
 	 * @param filename The file containing the road data, in the format 
 	 *   described.
@@ -153,9 +141,6 @@ public class GraphLoader implements GraphLoaderInterface
 	 * 
 	 * where each line is a segment of a road
 	 * These road segments are assumed to be ONE WAY.
-	 * 
-	 * This method will collapse the points so that only intersections 
-	 * are represented as nodes in the graph.
 	 * 
 	 * @param filename The file containing the road data, in the format 
 	 *   described.
@@ -496,32 +481,25 @@ public class GraphLoader implements GraphLoaderInterface
 		return pointMap;
 	}
 	public static String findStreetName(double lat, double lon) {
-        // Build the pointMap using your buildPointMapOneWay method
         HashMap<GeographicPoint, List<LinkedList<RoadLineInfo>>> pointMap =
                 buildPointMapOneWay("data/maps/boston_coordinates.map");
 
-        // Create a GeographicPoint object for the given coordinates
         GeographicPoint point = new GeographicPoint(lat, lon);
 
-        // Iterate over the HashMap entries
         for (hashMap.HashMap.Entry<GeographicPoint, List<LinkedList<RoadLineInfo>>> entry : pointMap.entrySet()) {
             GeographicPoint key = entry.getKey();
             List<LinkedList<RoadLineInfo>> roadLines = entry.getValue();
 
-            // Iterate over the road lines for each point
             for (LinkedList<RoadLineInfo> roadLine : roadLines) {
-                // Check if the given coordinates match any of the points in the road lines
                 for (RoadLineInfo roadLineInfo : roadLine) {
                     if (roadLineInfo.point1.x == lat && roadLineInfo.point1.y == lon ||
                             roadLineInfo.point2.x == lat && roadLineInfo.point2.y == lon) {
-                        // If coordinates match, return the street name
                         return roadLineInfo.roadName;
                     }
                 }
             }
         }
 
-        // If no match found, return null or throw an exception
         return null;
     }
 	

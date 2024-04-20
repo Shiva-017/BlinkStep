@@ -242,7 +242,6 @@ public class MarkerManager {
     	changeIcon(marker, intersectionURL);
 		markerMap.put(label.getItem(),marker);
     	markerPositions.add(label.getItem());
-        
 
 	}
 }

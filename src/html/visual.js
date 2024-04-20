@@ -27,7 +27,5 @@ function drop() {
 }
 
 function displayAlert(length, delay) {
-	////window.setTimeout(function() {
 		alert(length + " nodes visited in search.");
-	//}, delay);
 }

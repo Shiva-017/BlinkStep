@@ -47,7 +47,6 @@ import javafx.scene.web.WebView;
 public class MapApp extends Application 
 implements MapComponentInitializedListener{
 	
-	/* Map View Setup */
 	protected GoogleMapView mapComponent;
 	protected static GoogleMap map;
 	protected BorderPane bp;
@@ -57,12 +56,10 @@ implements MapComponentInitializedListener{
 	private static final double MARGIN_VAL = 10;
 	private static final double FETCH_COMPONENT_WIDTH = 160.0;
 	
-	// getter to get map
 	public static GoogleMap getMap() {
 	        return map;
 	    }
 	
-	// Getter method for primaryStage
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -70,7 +67,7 @@ implements MapComponentInitializedListener{
     /* START POINT */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		this.primaryStage = primaryStage;
+		MapApp.primaryStage = primaryStage;
 		try {
 			//boston boundaries
 	        float[] bound_arr = new float[] {42.35f, -71.09f, 42.37f, -71.07f};;
@@ -167,7 +164,6 @@ implements MapComponentInitializedListener{
 	public void mapInitialized() {
 
 		LatLong center = new LatLong(42.3601,-71.0589);
-		//LatLong center = new LatLong(42.3411, -71.0886);
 
 
 		// set map options
