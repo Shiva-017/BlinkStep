@@ -4,21 +4,35 @@
 
 2. Download the Project (BlinkStep).
 
-3. Setup JavaFX in Eclipse:
-   - Go to Eclipse -> Help -> Eclipse Marketplace.
-   - Search for "e(fx)clipse" and install it.
-   - After installation, you should see the "JavaFX" category when creating a new project.
+3. Install "e(fx)clipse:
+   - Open Eclipse -> Help -> Eclipse Marketplace.
+   - Type “fx” in Find textbox and click on “Go” to search.
+   - Select “e(fx)clipse X.Y.Z” and press “install” » X.Y.Z is the released version of e(fx)clipse.
+   - FroM now, we can see “JavaFX” category when you select “new” to create a project.
 
 4. Download JavaFX SDK:
    - Download JavaFX SDK from [GluonHQ](https://gluonhq.com/products/javafx/).
-   - Decompress the folder and place it in your desired directory.
+   - You need to select your platform to find the right SDK version for your environment.
+   - Place the decompressed folder to your local directory, such as creating a “JavaFX SDK” folder.
+   - Create a “JavaFX-SDK” folder in the local computer and place decompressed version into the folder.
 
 5. Create User Library for JavaFX in Eclipse:
-   - Go to Eclipse -> Preferences -> Java -> Build Path -> User Libraries.
-   - Create a new User Library named "JavaFX".
-   - Add all .jar files from the "lib" directory of the downloaded JavaFX SDK.
+   - Eclipse -> Preferences -> Java -> Build Path -> User Libraries
+   - New a “User Library” -> Name is “JavaFX”
+   - Press “Add External JARs” and select all .jar from “lib” Add all .jars from “JavaFX SDK -> lib” 
+     folder
 
-6. Add other External JARs such as javax.json and gmapsfx jars:
+6. Configure JavaFX Project:
+  - Right click project -> Properties -> Java Build Path
+  - In Libraries tab:
+        » click “Modulepath”
+        » select “Add Library ...” button
+        » choose “User Library”
+        » choose “JavaFX” -> “Finish” -> “Apply” -> “Apply and Close”
+        » At this moment, all errors should be gone.
+
+
+7. Add other External JARs such as javax.json and gmapsfx jars:
    - Go to Java Build Path -> Libraries -> Classpath.
    - Click "Add External JARs" and add all .jar files from the "libs/" folder.
    - Click 'Apply and Close'.
