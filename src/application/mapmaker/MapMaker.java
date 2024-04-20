@@ -1,6 +1,5 @@
 package application.mapmaker;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -34,11 +33,8 @@ public class MapMaker {
 
         PrintWriter outfile = null;
         try {
-            FileWriter fileWriter = new FileWriter("data/maps/boston_cordinates.txt");
+            FileWriter fileWriter = new FileWriter("data/maps/boston_coordinates.map");
             outfile = new PrintWriter(fileWriter);
-            System.out.print("Written");
-            System.out.println(System.getProperty("user.dir"));
-            System.out.println("Writing to file at: " + new java.io.File("./b.txt").getAbsolutePath());
             
             for (JsonObject elem : elements.getValuesAs(JsonObject.class)) {
                 if (elem.getString("type").equals("way")) {
@@ -55,7 +51,6 @@ public class MapMaker {
                             }
 
                             outfile.println("" + start + end + "\"" + street + "\" " + type);
-                            System.out.println("" + start + end + "\"" + street + "\" " + type);
                             if (oneway.equals("no")) {
                                 outfile.println("" + end + start + "\"" + street + "\" " + type);
                             }
