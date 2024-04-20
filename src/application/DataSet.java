@@ -64,7 +64,8 @@ public class DataSet {
 
 
     public Object[] getPoints() {
-    	HashSet<geography.GeographicPoint> pointSet = roads.keySet();
+    	@SuppressWarnings("unchecked")
+		HashSet<geography.GeographicPoint> pointSet = (HashSet<GeographicPoint>) roads.keySet();
     	return pointSet.toArray();
     }
 

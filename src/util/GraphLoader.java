@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,7 +44,6 @@ public class GraphLoader implements GraphLoaderInterface
 		HashSet<GeographicPoint> nodes = new HashSet<GeographicPoint>();
         HashMap<GeographicPoint,List<LinkedList<RoadLineInfo>>> pointMap = 
         		buildPointMapOneWay(roadDataFile);
-		
         // Print the intersections to the file
 		List<GeographicPoint> intersections = findIntersections(pointMap);
 		for (GeographicPoint pt : intersections) {
@@ -474,7 +474,7 @@ public class GraphLoader implements GraphLoaderInterface
 	// are lists of length two where each entry in the list is a list.
 	// The first list stores the outgoing roads while the second 
 	// stores the outgoing roads.
-	private static HashMap<GeographicPoint, List<LinkedList<RoadLineInfo>>>
+	public static HashMap<GeographicPoint, List<LinkedList<RoadLineInfo>>>
 	buildPointMapOneWay(String filename)
 	{
 		BufferedReader reader = null;
@@ -495,7 +495,37 @@ public class GraphLoader implements GraphLoaderInterface
         }
 		return pointMap;
 	}
+	public static String findStreetName(double lat, double lon) {
+        // Build the pointMap using your buildPointMapOneWay method
+        HashMap<GeographicPoint, List<LinkedList<RoadLineInfo>>> pointMap =
+                buildPointMapOneWay("data/maps/boston_coordinates.map");
 
+        // Create a GeographicPoint object for the given coordinates
+        GeographicPoint point = new GeographicPoint(lat, lon);
+
+        // Iterate over the HashMap entries
+        for (hashMap.HashMap.Entry<GeographicPoint, List<LinkedList<RoadLineInfo>>> entry : pointMap.entrySet()) {
+            GeographicPoint key = entry.getKey();
+            List<LinkedList<RoadLineInfo>> roadLines = entry.getValue();
+
+            // Iterate over the road lines for each point
+            for (LinkedList<RoadLineInfo> roadLine : roadLines) {
+                // Check if the given coordinates match any of the points in the road lines
+                for (RoadLineInfo roadLineInfo : roadLine) {
+                    if (roadLineInfo.point1.x == lat && roadLineInfo.point1.y == lon ||
+                            roadLineInfo.point2.x == lat && roadLineInfo.point2.y == lon) {
+                        // If coordinates match, return the street name
+                        return roadLineInfo.roadName;
+                    }
+                }
+            }
+        }
+
+        // If no match found, return null or throw an exception
+        return null;
+    }
+	
+	
 
 	private static void 
 	addToPointsMapOneWay(RoadLineInfo line,
@@ -597,7 +627,7 @@ class RoadLineInfo
 		else throw new IllegalArgumentException();
 	}
 	
-	
+	 
 	public boolean equals(Object o)
 	{
 		if (o == null || !(o instanceof RoadLineInfo))

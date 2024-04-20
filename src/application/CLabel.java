@@ -1,5 +1,6 @@
 package application;
 
+import geography.GeographicPoint;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
@@ -58,6 +59,18 @@ public class CLabel<T> extends Label {
 			setTextFill(RED);
 		}
 	}
+	
+	protected void updateViewWithStreetName(T item, boolean empty, String streetName) {
+		if(item != null) {
+			setText(streetName);
+			setTextFill(GREEN);
+		}
+		else {
+			// TODO -- could change this to be more generic
+			setText("Choose Point");
+			setTextFill(RED);
+		}
+	}
 
     public final ObjectProperty<T> itemProperty(){ return item; }
 
@@ -69,5 +82,12 @@ public class CLabel<T> extends Label {
 	public void setItem(T newItem) {
 		item.set(newItem);
     updateView(item.get(), true);
+	}
+
+	@SuppressWarnings("unchecked")
+	public void setItemWithName(GeographicPoint point, String street) {
+		item.set((T) point);
+		updateViewWithStreetName(item.get(), true, street);
+		
 	}
 }
