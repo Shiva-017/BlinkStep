@@ -1,0 +1,46 @@
+ Instructions for setting up and running the project efficiently:
+
+1. Install JDK 21.0.1: Ensure you have JDK 21.0.1 installed.
+
+2. Download the Project (BlinkStep).
+
+3. Setup JavaFX in Eclipse:
+   - Go to Eclipse -> Help -> Eclipse Marketplace.
+   - Search for "e(fx)clipse" and install it.
+   - After installation, you should see the "JavaFX" category when creating a new project.
+
+4. Download JavaFX SDK:
+   - Download JavaFX SDK from [GluonHQ](https://gluonhq.com/products/javafx/).
+   - Decompress the folder and place it in your desired directory.
+
+5. Create User Library for JavaFX in Eclipse:
+   - Go to Eclipse -> Preferences -> Java -> Build Path -> User Libraries.
+   - Create a new User Library named "JavaFX".
+   - Add all .jar files from the "lib" directory of the downloaded JavaFX SDK.
+
+6. Add other External JARs such as javax.json and gmapsfx jars:
+   - Go to Java Build Path -> Libraries -> Classpath.
+   - Click "Add External JARs" and add all .jar files from the "libs/" folder.
+   - Click 'Apply and Close'.
+
+7. Configure Run Configuration:
+   - Right-click on the project, select Run As -> Run Configurations.
+   - Click on "+" to add a new Run Configuration.
+   - Name it "main".
+   - In the Arguments tab -> VM Arguments, paste:
+     ```
+     --module-path your_path/to/lib (Example :  /Users/nikithakambhampati/Desktop/Semester/PSA/JavaFX_SDK/lib)
+     --add-modules=javafx.swing,javafx.graphics,javafx.fxml,javafx.media,javafx.web
+     --add-reads javafx.graphics=ALL-UNNAMED
+     --add-opens javafx.controls/com.sun.javafx.charts=ALL-UNNAMED
+     --add-opens javafx.graphics/com.sun.javafx.iio=ALL-UNNAMED
+     --add-opens javafx.graphics/com.sun.javafx.iio.common=ALL-UNNAMED
+     --add-opens javafx.graphics/com.sun.javafx.css=ALL-UNNAMED
+     --add-opens javafx.base/com.sun.javafx.runtime=ALL-UNNAMED
+     ```
+   - Uncheck all checkboxes under the VM arguments.
+
+8. Run the Program:
+   - Go to MapApp.java and run the program as Java Application.
+
+By following these steps, you should be able to efficiently set up and run the project in Eclipse.
