@@ -516,25 +516,5 @@ public class MapGraph {
 	        System.out.println("No path found.");
 	        return new LinkedList<>();
 	    }
-	}
-
-
-	public static void main(String[] args)
-	{
-		System.out.print("Making a new map...");
-		
-		
-		MapGraph theMap = new MapGraph();
-
-		GeographicPoint start = new GeographicPoint(32.8648772, -117.2254046);
-		GeographicPoint end = new GeographicPoint(32.8660691, -117.217393);
-		
-		
-		List<GeographicPoint> route = theMap.dijkstra(start,end);
-		List<GeographicPoint> route2 = theMap.aStarSearch(start,end);
-
-		
-		
-	}
-	
+	}	
 }
