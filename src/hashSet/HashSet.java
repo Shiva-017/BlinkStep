@@ -2,10 +2,10 @@ package hashSet;
 
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 import hashMap.HashMap.Entry;
+import list.LinkedList;
 
 public class HashSet<T> implements HashSetADT<T>,Iterable<T> {
 	private LinkedList<T>[] buckets;

@@ -1,9 +1,9 @@
 package hashMap;
 
 import java.util.Collection;
-import java.util.LinkedList;
 
 import hashSet.HashSet;
+import list.LinkedList;
 
 public class HashMap<K,V> implements HashMapADT<K,V> {
 

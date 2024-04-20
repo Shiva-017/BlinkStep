@@ -3,7 +3,7 @@ package list;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListADT<T> implements ListADT<T> {
+public class LinkedList<T> implements ListADT<T> {
 	 private Node<T> head;
 	    private Node<T> tail;
 	    private int size = 0;
@@ -18,7 +18,7 @@ public class LinkedListADT<T> implements ListADT<T> {
 	        }
 	    }
 
-		public LinkedListADT() {
+		public LinkedList() {
 			// TODO Auto-generated constructor stub
 		}
 
@@ -128,5 +128,55 @@ public class LinkedListADT<T> implements ListADT<T> {
 	            }
 	        };
 	    }
+		
+		public boolean contains(T data) {
+		    Node<T> current = head;
+		    while (current != null) {
+		        if (current.data.equals(data)) {
+		            return true;
+		        }
+		        current = current.next;
+		    }
+		    return false;
+		}
+		
+		public boolean remove(T data) {
+	        if (head == null) return false; 
+
+	        if (head.data.equals(data)) {
+	            head = head.next;
+	            if (head == null) {
+	                tail = null; 
+	            }
+	            size--;
+	            return true;
+	        }
+
+	        Node<T> current = head;
+	        Node<T> prev = null;
+
+	        while (current != null && !current.data.equals(data)) {
+	            prev = current;
+	            current = current.next;
+	        }
+
+	        if (current == null) {
+	            return false; 
+	        }
+
+	        // Remove the element
+	        prev.next = current.next;
+	        if (prev.next == null) {
+	            tail = prev; 
+	        }
+	        size--;
+
+	        return true;
+	    }
+
+		public void clear() {
+			// TODO Auto-generated method stub
+			
+		}
 
 }

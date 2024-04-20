@@ -19,7 +19,7 @@ import gmapsfx.javascript.object.MapTypeIdEnum;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import list.LinkedListADT;
+import list.LinkedList;
 import list.ListADT;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -311,7 +311,7 @@ implements MapComponentInitializedListener{
 		rbBDS.setToggleGroup(group);
 		
 		@SuppressWarnings("rawtypes")
-		LinkedListADT ll = new LinkedListADT();
+		LinkedList ll = new LinkedList();
 		ll.add((T)rbB);
 		ll.add((T)rbD);
 		ll.add((T)rbA);
