@@ -557,14 +557,6 @@ public class GraphLoader implements GraphLoaderInterface
         return new RoadLineInfo(p1, p2, tokens.get(4), tokens.get(5));
 		
 	}
-	
-	public static void main(String[] args)
-	{
-		
-		GraphLoader graphLoader = new GraphLoader();
-		graphLoader.createIntersectionsFile("data/maps/boston_coordinates.map", "data/maps/boston.intersections");
-	}
-	
 }	
 	
 
