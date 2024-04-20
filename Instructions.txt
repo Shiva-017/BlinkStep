@@ -8,7 +8,7 @@
    - Open Eclipse -> Help -> Eclipse Marketplace.
    - Type “fx” in Find textbox and click on “Go” to search.
    - Select “e(fx)clipse X.Y.Z” and press “install” » X.Y.Z is the released version of e(fx)clipse.
-   - FroM now, we can see “JavaFX” category when you select “new” to create a project.
+   - From now, we can see “JavaFX” category when you select “new” to create a project.
 
 4. Download JavaFX SDK:
    - Download JavaFX SDK from [GluonHQ](https://gluonhq.com/products/javafx/).
@@ -18,14 +18,14 @@
 
 5. Create User Library for JavaFX in Eclipse:
    - Eclipse -> Preferences -> Java -> Build Path -> User Libraries
-   - New a “User Library” -> Name is “JavaFX”
+   - Crreate a New “User Library” and name it as “JavaFX”
    - Press “Add External JARs” and select all .jar from “lib” Add all .jars from “JavaFX SDK -> lib” 
      folder
 
 6. Configure JavaFX Project:
   - Right click project -> Properties -> Java Build Path
   - In Libraries tab:
-        » click “Modulepath”
+        » click “Classpath”
         » select “Add Library ...” button
         » choose “User Library”
         » choose “JavaFX” -> “Finish” -> “Apply” -> “Apply and Close”
