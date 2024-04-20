@@ -29,8 +29,6 @@
         » select “Add Library ...” button
         » choose “User Library”
         » choose “JavaFX” -> “Finish” -> “Apply” -> “Apply and Close”
-        » At this moment, all errors should be gone.
-
 
 7. Add other External JARs such as javax.json and gmapsfx jars:
    - Go to Java Build Path -> Libraries -> Classpath.
