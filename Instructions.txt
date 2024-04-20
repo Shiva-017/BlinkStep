@@ -34,7 +34,7 @@
 
 7. Add other External JARs such as javax.json and gmapsfx jars:
    - Go to Java Build Path -> Libraries -> Classpath.
-   - Click "Add External JARs" and add all .jar files from the "libs/" folder.
+   - Click "Add External JARs" and add all .jar files from the "libs/" folder in the BlinkStep project.
    - Click 'Apply and Close'.
 
 7. Configure Run Configuration:
